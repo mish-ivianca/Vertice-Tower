@@ -1,0 +1,59 @@
+:root {
+    /* TIPOGRAFÍA */
+    --font-heading:"Playfair Display", serif;
+    --font-body:"Inter", sans-serif;
+
+    /* COLORES BASE */
+    --color-white:#FFFFFF;
+    --color-black:#0F0F0F;
+    --color-text:#1A1A1A;
+    --color-text-light:#666666;
+    --color-verde: #5BDA4A;
+    --color-rojo: #DA4A4A;
+
+    /* OVERLAY */
+    --color-overlay:rgba(0,0,0,.45);
+
+    /* SOMBRAS */
+    --shadow-sm:0 4px 10px rgba(0,0,0,.12);
+    --shadow-md:0 8px 25px rgba(0,0,0,.18);
+}
+
+
+/* SISTEMA TIPOGRAFICO */
+.text-display {
+    font-family:var(--font-heading);
+    font-size:clamp(3rem,7vw,5.5rem);
+    font-weight:500;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    line-height:1.05;
+
+}
+.text-heading {
+    font-family:var(--font-heading);
+    font-size:clamp(2rem,4vw,3.5rem);
+    font-weight:500;
+}
+.text-title {
+    font-family:var(--font-body);
+    font-size:1.4rem;
+    font-weight:600;
+}
+.text-body {
+    font-family:var(--font-body);
+    font-size:1rem;
+    color:var(--color-text-light);
+    line-height:1.8;
+}
+.text-small {
+    font-size:14px;
+    font-weight:400;
+    line-height:1.5;
+}
+.text-gold {
+    color:var(--color-accent);
+}
+.text-emerald {
+    color:var(--color-accent-hover);
+}
