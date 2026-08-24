@@ -1,13 +1,41 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import projects from "../../data/projectsData";
 import DepartmentInfo from "../../components/project/Departament/DepartamentInfo";
 import DepartmentViewSelector from "../../components/project/Departament/DepartamentViewSelector";
 import DepartmentViewer from "../../components/project/Departament/departamentViewer";
-import { BsDoorClosed } from "react-icons/bs";
-import { BsDoorOpen } from "react-icons/bs";
+import { LuPanelLeftOpen } from "react-icons/lu";
+import { LuPanelRightOpen } from "react-icons/lu";
 
 function DepartmentDetail() {
+    const [position, setPosition] = useState({
+        x: 0,
+        y: 0
+    });
+    const dragging = useRef(false);
+    const startTouch = useRef({
+        x: 0,
+        y: 0
+    });
+    const handleTouchStart = (e) => {
+        const touch = e.touches[0];
+        dragging.current = true;
+        startTouch.current = {
+            x: touch.clientX - position.x,
+            y: touch.clientY - position.y
+        };
+    };
+    const handleTouchMove = (e) => {
+        if (!dragging.current) return;
+        const touch = e.touches[0];
+        setPosition({
+            x: touch.clientX - startTouch.current.x,
+            y: touch.clientY - startTouch.current.y
+        });
+    };
+    const handleTouchEnd = () => {
+        dragging.current = false;
+};
     const navigate = useNavigate();
     const { slug, codigo } = useParams();
     const [view, setView] = useState("3d");
@@ -64,16 +92,15 @@ function DepartmentDetail() {
             className="
                 relative
                 h-full
-                w-full
+                h-[100vh]
                 overflow-hidden
-                bg-slate-50
             "
         >
             <div
                 className="
                     relative
                     w-full
-                    h-full
+                    h-[100vh]
                     overflow-hidden
                 "
             >
@@ -87,22 +114,41 @@ function DepartmentDetail() {
                     "
                 >
                     <button
-                        onClick={() => navigate(`/portal-comercial/${slug}/recorrido`)}
+                        onClick={() =>
+                            navigate(`/portal-comercial/${slug}/recorrido`)
+                        }
+
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
+
+                        style={{
+                            transform: `translate(${position.x}px, ${position.y}px)`
+                        }}
+
                         className="
                             group
                             fixed
                             right-4
-                            bottom-4
-                            z-30
-                            w-60
+                            bottom-20
+                            md:bottom-4
+                            z-80
+                            w-40
                             h-auto
                             rounded-lg
                             overflow-hidden
                             shadow-2xl
-                            transition-transform
-                            duration-300
+                            transition-none
+                            md:transition-transform
+                            md:duration-300
                             origin-bottom-right
-                            hover:scale-180
+
+                            md:w-60
+                            md:hover:scale-180
+
+                            touch-none
+                            cursor-grab
+                            active:cursor-grabbing
                         "
                     >
                         <img 
@@ -122,12 +168,13 @@ function DepartmentDetail() {
                             bg-black/80
                             px-2
                             py-1
-                            text-sm
+                            text-xs
                             text-white
                             text-center
                             transition-opacity
                             duration-300
                             group-hover:opacity-0
+                            md:text-sm
                         ">Ubicación en Piso</span>
                     </button>
                     <div
@@ -137,7 +184,7 @@ function DepartmentDetail() {
                             top-0
                             w-[280px]
                             h-full
-                            z-10
+                            z-100
 
                             shadow-[8px_0_18px_-10px_rgba(0,0,0,0.35)]
 
@@ -153,6 +200,7 @@ function DepartmentDetail() {
                         `}
                     >
                         <DepartmentInfo
+                            project={project}
                             department={department}
                             floor={floor}
                         />
@@ -192,24 +240,29 @@ function DepartmentDetail() {
                     onClick={() => setShowInfo(!showInfo)}
                     className="
                         fixed
-                        left-6
-                        top-21
-                        z-30
-                        h-8
-                        w-8
-                        p-1
+                        left-0
+                        top-15
+                        z-130
                         flex
+                        h-12
+                        w-12
                         items-center
                         justify-center
-                        rounded-full
+                        rounded-r-full
                         bg-teal-500
                         text-white
                         shadow-xl
-                        hover:bg-slate-700
                         transition
+                        hover:bg-slate-700
+
+                        md:left-9
+                        md:top-18
+                        md:h-12
+                        md:w-12
+                        md:rounded-full
                     "
                 >
-                    {showInfo ? <BsDoorClosed /> : <BsDoorOpen />}
+                    {showInfo ? <LuPanelRightOpen className="size-6"/> : <LuPanelLeftOpen className="size-6"/>}
                 </button>
             </div>
         </main>

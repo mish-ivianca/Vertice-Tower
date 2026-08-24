@@ -5,35 +5,71 @@ import fotoA101_2 from "./departaments/A101/galeria/foto2.png";
 import fotoA101_3 from "./departaments/A101/galeria/foto3.png";
 import fotoA101_4 from "./departaments/A101/galeria/foto4.png";
 import fotoA101_5 from "./departaments/A101/galeria/foto5.png";
-import floorImage from "./planoAurora.png";
+import floorImage from "./images/planta.png";
 import departmentsSvg from "./departments.svg";
 import departmentPaths from "./departmentPaths";
 import frameA101 from "./departaments/A101/frameA101.png";
+import brochurePDF from "./brochure-vertice.pdf";
+import Background01Desktop from  "./videos/V2.mp4";
+import Background02Desktop from "./videos/V1.mp4";
+import Background03Desktop from "./videos//V3.mp4";
+import NosotrosBackground from "./videos/backgroundDesktop.MP4";
+import imageUbicacion from "./ubicacionAurora.PNG";
+import ImageContacto from "./images/contacto.PNG";
+import ImageNosotros1 from "./images/nosotros/nosotros01.png";
+import ImageNosotros2 from "./images/nosotros/nosotros02.png";
 
 const project = {
     id: 1,
     slug: "aurora",
     nombre: "Edificio Aurora",
+    logo: null,
     ciudad: "La Paz",
     direccion: "Av. Costanera",
+    imageUbicacion: imageUbicacion,
+    linkUbicacion:"https://maps.app.goo.gl/oVDxfzhHSxMuJpKVA",
+    iframeUbicacion:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.2520681476913!2d-66.15559471046625!3d-17.384656136577714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e3740f512e7923%3A0x42bb93e9c4f3d6ab!2sC.%2016%20de%20Julio%20713%2C%20Cochabamba!5e1!3m2!1ses!2sbo!4v1787254722832!5m2!1ses!2sbo",
+    contacto:"+519 76266225",
+    whatsappLink:"https://wa.link/eme3je",
+    imageContacto: ImageContacto,
+    imageNosotros: [ImageNosotros1, ImageNosotros2],
+    correo: "ojosdeflor00@gmail.com",
     descripcion:
         "Departamentos modernos con excelente ubicación, áreas comunes y acabados de alta calidad.",
     precioDesde: 95000,
     moneda: "USD",
     estado: "En Venta",
     hero: {
-        image: fotoA101_1,
-        video: null,
+        stages: [
+            {
+                desktop: Background01Desktop,
+                title: "Vertice Tower",
+                subtitle: "La mejor inversión para tu proximo proyecto",
+                button: "CONOCER PROYECTO",
+            },
+            {
+                desktop: Background02Desktop,
+                title: " ",
+                subtitle: " ",
+                button: "DESCUBRIR",
+            },
+            {
+                desktop: Background03Desktop,
+                title: "Vertice Tower",
+                subtitle: "Un lugar exclusivo para ti y tu familia",
+                button: "EMPEZAR",
+            },
+        ],
     },
-    logo: null,
+    brochure: brochurePDF,
     planos: {
         floorImage,
         departmentsSvg,
         departmentPaths,
         departmentMap: {
-        left: "15.65%",
-        top: "18.1%",
-        width: "69.9%",
+        left: "10.45%",
+        top: "21%",
+        width: "78%",
         viewBox: "0 0 2670 1350",
     },
     },

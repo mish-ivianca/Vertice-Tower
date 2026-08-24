@@ -1,22 +1,19 @@
 function Container({children, className=""}) {
-
     return (
-
         <div
             className={`
-                max-w-7xl
+                max-w-8xl
                 mx-auto
-                px-4 sm:px-6 lg:px-8
+                px-5
+                md:px-10
+                lg:px-20
                 ${className}
             `}
         >
-
             {children}
 
         </div>
-
     )
-
 }
 
 export default Container;

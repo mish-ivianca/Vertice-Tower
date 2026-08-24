@@ -22,7 +22,6 @@ function DepartmentViewer({ view, department }) {
                 w-full
                 h-full
                 overflow-hidden
-                shadow-xl
             "
         >
             {view === "3d" && (
@@ -40,12 +39,11 @@ function DepartmentViewer({ view, department }) {
                             src={department.render3D}
                             alt={`Render ${department.codigo}`}
                             className="
-                                max-w-[calc(100%-5rem)]
-                                max-h-[calc(100%-5rem)]
+                                max-w-[calc(100%-2rem)]
+                                max-h-[calc(100%-2rem)]
                                 w-auto
                                 h-auto
                                 object-contain
-                                m-10
                             "
                         />
                 </div>
@@ -68,12 +66,11 @@ function DepartmentViewer({ view, department }) {
                             src={department.planoTecnico}
                             alt={`Plano técnico ${department.codigo}`}
                             className="
-                                max-w-[calc(100%-5rem)]
-                                max-h-[calc(100%-5rem)]
+                                max-w-[calc(100%-2rem)]
+                                max-h-[calc(100%-2rem)]
                                 w-auto
                                 h-auto
                                 object-contain
-                                m-10
                             "
                         />
                 </div>
@@ -89,6 +86,9 @@ function DepartmentViewer({ view, department }) {
                         flex
                         items-center
                         justify-center
+                        pt-5
+                        pb-10
+                        md:pt-15
                     "
                 >
                     <img
@@ -132,7 +132,7 @@ function DepartmentViewer({ view, department }) {
                                     inset-0
                                     w-full
                                     h-full
-                                    pb-16
+                                    md:pb-23
                                     pt-2
                                     object-contain
                                     transition-opacity
@@ -152,7 +152,7 @@ function DepartmentViewer({ view, department }) {
                                         inset-0
                                         w-full
                                         h-full
-                                        pb-16
+                                        md:pb-23
                                         pt-2
                                         object-contain
 
@@ -174,10 +174,6 @@ function DepartmentViewer({ view, department }) {
                             )}
 
                         </div>
-                        {/* =========================
-                            ANTERIOR
-                        ========================= */}
-
                         <button
                             onClick={() =>
                                 changeGallery(
@@ -188,7 +184,8 @@ function DepartmentViewer({ view, department }) {
                             }
                             className="
                                 absolute
-                                left-5
+                                md:left-5
+                                left-1
                                 top-1/2
                                 -translate-y-1/2
                                 z-20
@@ -209,8 +206,8 @@ function DepartmentViewer({ view, department }) {
                                 transition
                             "
                         >
-            <IoIosArrowBack size={20}/>
-        </button>
+                            <IoIosArrowBack size={20}/>
+                        </button>
 
 
                         {/* =========================
@@ -218,49 +215,49 @@ function DepartmentViewer({ view, department }) {
                         ========================= */}
 
                         <button
-            onClick={() =>
-                changeGallery(
-                    galleryIndex ===
-                    department.galeria.length - 1
-                        ? 0
-                        : galleryIndex + 1
-                )
-            }
-            className="
-                absolute
-                right-5
-                top-1/2
-                -translate-y-1/2
-                z-20
+                            onClick={() =>
+                                changeGallery(
+                                    galleryIndex ===
+                                    department.galeria.length - 1
+                                        ? 0
+                                        : galleryIndex + 1
+                                )
+                            }
+                            className="
+                                absolute
+                                right-1
+                                md:right-5
+                                top-1/2
+                                -translate-y-1/2
+                                z-20
 
-                h-10
-                w-10
-                rounded-full
+                                h-10
+                                w-10
+                                rounded-full
 
-                flex
-                items-center
-                justify-center
+                                flex
+                                items-center
+                                justify-center
 
-                bg-white/80
-                text-slate-800
+                                bg-white/80
+                                text-slate-800
 
-                hover:scale-110
+                                hover:scale-110
 
-                transition
-            "
-        >
-            <IoIosArrowForward size={20}/>
-        </button>
-
-
-
+                                transition
+                            "
+                        >
+                            <IoIosArrowForward size={20}/>
+                        </button>
                         {/* =========================
                             CONTADOR
                         ========================= */}
                         <div
                             className="
                                 absolute
-                                bottom-17
+                                bottom-20
+                                md:bottom-22
+                                lg:bottom-25
                                 left-1/2
                                 -translate-x-1/2
                                 z-20

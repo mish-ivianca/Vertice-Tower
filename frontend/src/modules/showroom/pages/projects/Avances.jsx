@@ -1,26 +1,49 @@
-import Container from "../../../../shared/components/Container";
-import Section from "../../../../shared/components/Section";
+import Container from "../../../../shared/components/container/Container";
+import avances from "../../../../projects/aurora/avances";
+import AvanceMes from "../../components/project/avances/AvanceMes";
+import { MdConstruction } from "react-icons/md";
+import PageHeader from "../../components/project/pageHeader/PageHeader";
 
-
-function Avances(){
-
+function Avances() {
     return (
-
-        <Section>
+        <main
+            className="
+                w-full
+                bg-gradient-to-bl
+                from-zinc-100
+                to-zinc-50
+            "
+        >
 
             <Container>
 
-                <h1 className="text-display">
-                    Avances
-                </h1>
+                <div className="py-12 md:py-16">
+
+                    {/* ENCABEZADO */}
+                    <PageHeader
+                        icon={MdConstruction}
+                        title="Avances de obra"
+                        subtitle="Así crece nuestro proyecto"
+                    />
+
+                    {/* AVANCES */}
+                    <div className="mt-12 space-y-16 md:space-y-20">
+
+                        {avances.map((avance) => (
+                            <AvanceMes
+                                key={`${avance.mes}-${avance.anio}`}
+                                avance={avance}
+                            />
+                        ))}
+
+                    </div>
+
+                </div>
 
             </Container>
 
-        </Section>
-
-    )
-
+        </main>
+    );
 }
-
 
 export default Avances;

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap');
 
 @import "tailwindcss";
 
@@ -12,15 +14,37 @@ body,
     width: 100%;
     margin: 0;
     padding: 0;
-}
+    position:absolute;
+    z-index: 1;
 
+}
 
 body {
     font-family: var(--font-primary);
+    background-color: rgb(241, 237, 237);
+    color: var(--color-text-primary);
+}
+.font-montserrat {
+    font-family: var(--font-primary);
+}
+.font-lettering {
+    font-family: var(--font-lettering);
+}
+.font-bold {
+    font-family: var(--font-bold);
+}
+.font-secondary {
+    font-family: var(--font-secondary);
+}
+.menu-link {
+    @apply relative py-2 transition-colors duration-300;
+}
 
-    background-color:
-        var(--color-background);
+.menu-link::after {
+    content: "";
+    @apply absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300;
+}
 
-    color:
-        var(--color-text-primary);
+.menu-link:hover::after {
+    width: 100%;
 }

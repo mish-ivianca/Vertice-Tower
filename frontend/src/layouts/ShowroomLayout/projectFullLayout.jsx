@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
-import NavbarProject from "../../shared/components/navbar/NavbarProject";
+import NavbarProject from "../../shared/components/navbar/navbarProject";
+import PageTransition from "../../modules/showroom/components/PageTransition";
 
 function ProjectLayout() {
     return (
@@ -8,7 +9,7 @@ function ProjectLayout() {
         >
             <NavbarProject />
             <main className="flex-1 min-h-0">
-                <Outlet />
+                <PageTransition />
             </main>
         </div>
     );

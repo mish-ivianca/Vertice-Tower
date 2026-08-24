@@ -53,7 +53,7 @@ function Projects(){
                             nombre={project.nombre}
                             ciudad={project.ciudad}
                             precio={project.precioDesde}
-                            imagen={project.hero.image}
+                            imagen={project.hero.desktop}
                             slug={project.slug}
                         />
                     ))

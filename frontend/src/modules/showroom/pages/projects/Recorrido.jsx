@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import projects from "../../data/projectsData";
 import FloorPlan from "../../components/project/Recorrido/FloorPlan";
+import { MdKeyboardArrowDown } from "react-icons/md";
+
 
 function Recorrido() {
     const { slug} = useParams();
@@ -33,9 +35,8 @@ function Recorrido() {
             className="
                 relative
                 w-full
-                h-full
+                h-[100vh]
                 overflow-hidden
-                p-2
             "
         >
             <div
@@ -49,9 +50,10 @@ function Recorrido() {
                 <div
                     className="
                         absolute
-                        top-2
-                        right-2
+                        right-1
+                        lg:right-20
                         z-30
+                        mt-15
                     "
                 >
                     <button
@@ -63,29 +65,27 @@ function Recorrido() {
                             flex
                             items-center
                             justify-center
-                            w-24
-                            gap-2
-                            rounded-full
+                            w-20
+                            gap-1
+                            rounded-lg
                             bg-white
-                            px-2
-                            py-2
+                            p-1.5
+                            md:px-2
+                            md:py-2
                             shadow-xl
-                            font-medium
                             text-slate-800
                             hover:bg-slate-50
                             transition
+                            text-base
                         "
                     >
-
                         <span>
                             PISOS
                         </span>
-
                         <span
                             className={`
                                 transition-transform
                                 duration-200
-
                                 ${
                                     showFloors
                                         ? "rotate-180"
@@ -93,19 +93,17 @@ function Recorrido() {
                                 }
                             `}
                         >
-                            ↓
+                            <MdKeyboardArrowDown />
                         </span>
-
                     </button>
                     {showFloors && (
-
                         <div
                             className="
                                 absolute
                                 right-0
                                 mt-2
                                 w-15
-                                rounded-2xl
+                                rounded-lg
                                 bg-white
                                 p-1
                                 shadow-2xl
@@ -113,28 +111,21 @@ function Recorrido() {
                                 border-slate-100
                             "
                         >
-
                             {project.pisos.map((piso) => (
-
                                 <button
                                     key={piso.id}
-
                                     onClick={() => {
-
                                         setSelectedFloor(piso);
-
                                         setShowFloors(false);
-
                                     }}
-
                                     className={`
                                         w-full
-                                        rounded-xl
+                                        rounded-lg
                                         px-1
                                         py-1
                                         text-center
                                         transition
-
+                                        text-base
                                         ${
                                             selectedFloor.id === piso.id
                                                 ? "bg-slate-900 text-white"

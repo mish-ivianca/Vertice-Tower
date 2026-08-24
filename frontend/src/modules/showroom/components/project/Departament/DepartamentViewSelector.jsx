@@ -8,17 +8,21 @@ function DepartmentViewSelector({
         <nav
             className="
                 absolute
-                bottom-4
+                bottom-8
+                md:bottom-10
                 left-1/2
                 -translate-x-1/2
                 z-30
                 flex
                 items-center
+                justify-around
                 gap-1
                 rounded-full
                 bg-white/60
                 p-1
                 shadow-2xl
+                w-xs
+                md:w-auto
             "
         >
 
@@ -29,12 +33,13 @@ function DepartmentViewSelector({
 
                 className={`
                     rounded-full
-                    px-4
-                    py-2
-                    text-sm
+                    p-2
+                    text-[10px]
                     font-light
                     transition
-
+                    md:text-sm
+                    md:px-4
+                    md:py-2
                     ${
                         view === "3d"
                             ? "bg-slate-900 text-white"
@@ -53,12 +58,13 @@ function DepartmentViewSelector({
 
                 className={`
                     rounded-full
-                    px-4
-                    py-2
-                    text-sm
+                    p-2
+                    text-[10px]
                     font-light
                     transition
-
+                    md:text-sm
+                    md:px-4
+                    md:py-2
                     ${
                         view === "technical"
                             ? "bg-slate-900 text-white"
@@ -77,12 +83,13 @@ function DepartmentViewSelector({
 
                 className={`
                     rounded-full
-                    px-4
-                    py-2
-                    text-sm
+                    p-2
+                    text-[10px]
                     font-light
                     transition
-
+                    md:text-sm
+                    md:px-4
+                    md:py-2
                     ${
                         view === "gallery"
                             ? "bg-slate-900 text-white"
@@ -101,12 +108,13 @@ function DepartmentViewSelector({
 
                 className={`
                     rounded-full
-                    px-4
-                    py-2
-                    text-sm
+                    p-2
+                    text-[10px]
                     font-light
                     transition
-
+                    md:text-sm
+                    md:px-4
+                    md:py-2
                     ${
                         view === "tour"
                             ? "bg-slate-900 text-white"

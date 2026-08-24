@@ -26,46 +26,54 @@ function FloorPlan({ project, floor }) {
         <div
             className="
                 relative
-                w-full
                 h-full
-                flex
-                items-center
-                justify-center
-                overflow-hidden
+                w-full
+                overflow-x-auto
+                overflow-y-hidden
             "
         >
-
             <div
                 className="
                     relative
-                    max-w-full
-                    max-h-full
+                    flex
+                    h-full
+                    min-w-full
+                    w-max
+                    items-center
+                    justify-center
                 "
-                style={{
-                    aspectRatio: imageRatio || "1 / 1",
-                }}
             >
-
-                <img
+                <div
+                    className="
+                        relative
+                        h-full
+                        w-auto
+                        shrink-0
+                    "
+                    style={{
+                        aspectRatio: imageRatio || "1 / 1",
+                    }}
+                >
+                    <img
                     src={floorImage}
                     alt={`Plano del piso ${floor.numero}`}
                     onLoad={handleImageLoad}
                     className="
                         block
-                        w-full
+                        w-auto
                         h-full
-                        object-contain
+                        max-w-none
                     "
-                />
+                    />
 
-                <DepartmentMap
-                    project={project}
-                    floor={floor}
-                    departmentPaths={departmentPaths}
-                />
+                    <DepartmentMap
+                        project={project}
+                        floor={floor}
+                        departmentPaths={departmentPaths}
+                    />
 
+                </div>
             </div>
-
         </div>
     );
 }

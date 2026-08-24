@@ -3,11 +3,12 @@ import { LiaRulerCombinedSolid } from "react-icons/lia";
 import { IoBedOutline } from "react-icons/io5";
 import { PiToilet } from "react-icons/pi";
 import { MdOutlineKitchen } from "react-icons/md";
-import projects from "../../../data/projectsData";
 import { FaWhatsapp } from "react-icons/fa";
 import { VscFilePdf } from "react-icons/vsc";
 
-function DepartmentInfo({ department, floor}) {
+function DepartmentInfo({ project, department, floor}) {
+    const whatsappMessage = `Hola, estoy interesada en el departamento ${department.codigo} del piso ${floor.numero}°. Me podria brindar mas información.`;
+    const whatsappUrl = `${project.whatsappLink}?text=${encodeURIComponent(whatsappMessage)}`;
     const getStatusStyle = (estado) => {
         switch (estado) {
             case "Disponible":
@@ -24,21 +25,40 @@ function DepartmentInfo({ department, floor}) {
         <aside
             className="
                 absolute
-                top-10
-                w-70
-                h-auto
-                p-6
-                z-20
+                z-100
+
+                left-0
+                top-0
+                right-0
+                bottom-0
+                w-full
+                bg-white/95
+                backdrop-blur-sm
+                overflow-y-auto
+                p-3
+                pt-30
+
+                md:right-auto
+                md:bottom-0
+                md:left-0
+                md:h-auto
+                md:w-70
+                md:p-6
+                md:bg-white/95
+                md:z-110
+                md:flex
+                md:flex-col
+                md:pt-40
             "
         >
 
             {/* =========================
                 IDENTIFICACIÓN
             ========================= */}
-             <div className="px-3 pt-2 mb-6">
+             <div className="p-3 mb-2">
                 <h2
                     className="
-                        text-lg
+                        text-xl
                         font-semibold
                         leading-tight
                         text-slate-900
@@ -49,8 +69,8 @@ function DepartmentInfo({ department, floor}) {
 
                 <p
                     className="
-                        mt-0.5
-                        text-xs
+                        mt-2
+                        text-sm
                         text-slate-500
                     "
                 >
@@ -59,7 +79,7 @@ function DepartmentInfo({ department, floor}) {
 
                 <p
                     className="
-                        mt-0.5
+                        mt-1
                         text-2xl
                         font-bold
                         leading-tight
@@ -74,7 +94,7 @@ function DepartmentInfo({ department, floor}) {
                         rounded-full
                         px-4
                         py-1
-                        mt-2
+                        mt-3
                         text-sm
                         font-medium
                         ${getStatusStyle(
@@ -92,13 +112,11 @@ function DepartmentInfo({ department, floor}) {
             {/* =========================
                 INFORMACIÓN
             ========================= */}
-            <div className="mt-2 border-t border-slate-200">
-
+            <div className="my-2 border-t border-slate-200">
                 <div className="p-3">
-
                     <h3
                         className="
-                            text-xs
+                            text-base
                             font-semibold
                             text-slate-800
                             mb-2
@@ -109,7 +127,6 @@ function DepartmentInfo({ department, floor}) {
                     <div
                         className="
                             mt-1
-                            divide-y
                             divide-slate-100
                         "
                     >
@@ -125,11 +142,11 @@ function DepartmentInfo({ department, floor}) {
                                 <span className="text-sm text-slate-700">
                                     <LiaRulerCombinedSolid />
                                 </span>
-                                <span className="text-xs text-slate-500">
+                                <span className="text-sm text-slate-500">
                                     Superficie total
                                 </span>
                             </div>
-                            <span className="text-xs text-slate-500">
+                            <span className="text-sm text-slate-500">
                                 {department.superficie} m²
                             </span>
                         </div>
@@ -142,15 +159,15 @@ function DepartmentInfo({ department, floor}) {
                             "
                         >
                             <div className="flex items-center gap-2">
-                                <span className="text-sm text-slate-700">
+                                <span className="text-slate-700">
                                     <HiOutlineSquare3Stack3D />
                                 </span>
 
-                                <span className="text-xs text-slate-500">
+                                <span className="text-sm text-slate-500">
                                     Piso
                                 </span>
                             </div>
-                            <span className="text-xs text-slate-500">
+                            <span className="text-sm text-slate-500">
                                 {floor.numero}°
                             </span>
                         </div>
@@ -158,11 +175,11 @@ function DepartmentInfo({ department, floor}) {
                 </div>
             </div>
             
-            <div className="border-t border-slate-200">
+            <div className="my-2 border-t border-slate-200">
                 <div className="p-3">
                     <h3
                         className="
-                            text-xs
+                            text-base
                             font-semibold
                             text-slate-800
                             mb-2
@@ -170,7 +187,6 @@ function DepartmentInfo({ department, floor}) {
                     >
                         Distribución
                     </h3>
-                    <div className="divide-y divide-slate-100">
                         <div
                             className="
                                 flex
@@ -180,14 +196,14 @@ function DepartmentInfo({ department, floor}) {
                             "
                         >
                             <div className="flex items-center gap-2">
-                                <span className="text-sm text-slate-700">
+                                <span className="text-slate-700">
                                     <IoBedOutline />
                                 </span>
-                                <span className="text-xs text-slate-500">
+                                <span className="text-sm text-slate-500">
                                     Dormitorios
                                 </span>
                             </div>
-                            <span className="text-xs text-slate-500">
+                            <span className="text-sm text-slate-500">
                                 {department.dormitorios}
                             </span>
                         </div>
@@ -200,14 +216,14 @@ function DepartmentInfo({ department, floor}) {
                             "
                         >
                             <div className="flex items-center gap-2">
-                                <span className="text-sm text-slate-700">
+                                <span className="text-slate-700">
                                     <PiToilet />
                                 </span>
-                                <span className="text-xs text-slate-500">
+                                <span className="text-sm text-slate-500">
                                     Baños
                                 </span>
                             </div>
-                            <span className="text-xs text-slate-500">
+                            <span className="text-sm text-slate-500">
                                 {department.banos}
                             </span>
                         </div>
@@ -220,68 +236,70 @@ function DepartmentInfo({ department, floor}) {
                             "
                         >
                             <div className="flex items-center gap-2">
-                                <span className="text-sm text-slate-700">
+                                <span className="text-slate-700">
                                     <MdOutlineKitchen />
                                 </span>
-                                <span className="text-xs text-slate-500">
+                                <span className="text-sm text-slate-500">
                                     Cocina
                                 </span>
                             </div>
-                            <span className="text-xs text-slate-500">
+                            <span className="text-sm text-slate-500">
                                 {department.cocina ?? 1}
                             </span>
                         </div>
                     </div>
-                </div>
             </div>
             <div
                 className="
                     flex
                     flex-col
-                    border-t
+                    mt-auto
                     border-slate-200
-                    py-3
                 "
             >
-                <button
+                <a
+                    href={whatsappUrl}
                     className="
                         flex
                         gap-2
-                        my-2
+                        m-2
                         items-center
                         justify-center
                         rounded-full
                         bg-lime-500
                         p-2
-                        text-[10px]
-                        font-semibold
+                        text-base
                         text-white
                         transition
                         hover:bg-slate-700
                         animate-pulse
+                        shadow-lg
                     "
                 >
-                    <FaWhatsapp className="size-4"/>Solicitar información
-                </button>
-                <button
+                    <FaWhatsapp className="size-5"/>Solicitar información
+                </a>
+                <a
+                    href={project.brochure}
+                    download="VERTICE TOWER 2026"
                     className="
                         flex
                         gap-2
-                        my-2
+                        m-2
                         items-center
                         justify-center
                         rounded-full
                         bg-black
                         p-2
-                        text-[10px]
-                        font-semibold
+                        text-base
                         text-white
                         transition
                         hover:bg-slate-700
+                        shadow-lg
                     "
                 >
-                    <VscFilePdf className="size-4"/>Descargar PDF
-                </button>
+                    <VscFilePdf className="size-5" />
+                    Descargar PDF
+                </a>
             </div>
         </aside>
     );

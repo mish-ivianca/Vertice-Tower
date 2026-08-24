@@ -1,17 +1,28 @@
-function HeroBackground({ image }) {
+import { useEffect, useState } from "react";
+
+function HeroBackground({
+    desktopVideo,
+    loop = false,
+    onEnded,
+}) {
+
     return (
-        <img
-            src={image}
-            alt="Proyecto"
+        <video
+            key={desktopVideo}
+            src={desktopVideo}
+            autoPlay
+            muted
+            loop={loop}
+            playsInline
+            onEnded={onEnded}
             className="
-            absolute
-            inset-0
-            h-full
-            w-full
-            object-cover
-            scale-105
-            transition-transform
-            duration-[6000ms]
+                absolute
+                inset-0
+                z-0
+                h-full
+                w-full
+                object-cover
+                scale-105
             "
         />
     );
