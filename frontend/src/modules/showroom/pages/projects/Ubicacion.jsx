@@ -51,18 +51,20 @@ function Ubicacion() {
                         grid
                         gap-5
                         lg:grid-cols-[1fr_320px]
+                        h-[450px]
+                        md:h-[80%]
                     ">
                         <div className="
                             overflow-hidden
                             rounded-2xl
                             shadow-xl
                             shadow-lg
+                            
                         ">
                             <iframe
                                 src= {project.iframeUbicacion}
                                 className="
-                                    h-[450px]
-                                    md:h-[100%]
+                                    h-full
                                     w-full
                                 "
                                 style={{ border: 0 }}
@@ -89,6 +91,7 @@ function Ubicacion() {
                                 alt="Ubicacion"
                                 className="
                                     rounded-t-lg
+                                    h-auto
                                 "
                             />
                             <div className="

@@ -29,59 +29,61 @@ function Recorrido() {
     const [showFloors, setShowFloors] = useState(false);
     return (
         <main
-            style={{
-                backgroundColor: selectedFloor.colorFondo,
-            }}
             className="
                 relative
-                w-full
                 h-[100vh]
+                w-full
                 overflow-hidden
+                bg-zinc-100
             "
         >
             <div
                 className="
                     relative
-                    w-full
                     h-full
+                    w-full
                     overflow-hidden
                 "
             >
+
+                {/* BOTÓN PISOS */}
+
                 <div
                     className="
                         absolute
                         right-1
-                        lg:right-20
                         z-30
                         mt-15
+                        lg:right-20
                     "
                 >
+
                     <button
                         onClick={() =>
                             setShowFloors(!showFloors)
                         }
-
                         className="
                             flex
+                            w-20
                             items-center
                             justify-center
-                            w-20
                             gap-1
                             rounded-lg
                             bg-white
                             p-1.5
+                            text-base
+                            text-slate-800
+                            shadow-xl
+                            transition
+                            hover:bg-slate-50
                             md:px-2
                             md:py-2
-                            shadow-xl
-                            text-slate-800
-                            hover:bg-slate-50
-                            transition
-                            text-base
                         "
                     >
                         <span>
                             PISOS
                         </span>
+
                         <span
                             className={`
                                 transition-transform
@@ -96,6 +98,10 @@ function Recorrido() {
                             <MdKeyboardArrowDown />
                         </span>
                     </button>
+
+
+                    {/* LISTA DE PISOS */}
+
                     {showFloors && (
                         <div
                             className="
@@ -104,14 +110,16 @@ function Recorrido() {
                                 mt-2
                                 w-15
                                 rounded-lg
+                                border
+                                border-slate-100
                                 bg-white
                                 p-1
                                 shadow-2xl
-                                border
-                                border-slate-100
                             "
                         >
+
                             {project.pisos.map((piso) => (
+
                                 <button
                                     key={piso.id}
                                     onClick={() => {
@@ -124,8 +132,8 @@ function Recorrido() {
                                         px-1
                                         py-1
                                         text-center
-                                        transition
                                         text-base
+                                        transition
                                         ${
                                             selectedFloor.id === piso.id
                                                 ? "bg-slate-900 text-white"
@@ -133,34 +141,37 @@ function Recorrido() {
                                         }
                                     `}
                                 >
-
                                     {piso.numero}
-
                                 </button>
 
                             ))}
 
                         </div>
-
                     )}
 
                 </div>
+
+
+                {/* PLANO */}
+
                 <section
                     className="
-                        w-full
-                        h-full
                         flex
+                        h-full
+                        w-full
                         items-center
                         justify-center
                         overflow-hidden
                     "
                 >
+
                     <FloorPlan
                         project={project}
                         floor={selectedFloor}
                     />
 
                 </section>
+
             </div>
 
         </main>

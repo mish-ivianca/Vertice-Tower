@@ -1,7 +1,8 @@
-import { FiHome, FiTarget, FiEye, FiHeart } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 import Container from "../../../../shared/components/container/container";
 import projects from "../../data/projectsData";
+import TeamCard from "../../components/project/nosotros/TeamCard";
+import TitleCard from "../../components/project/nosotros/titleCard";
 
 function Nosotros() {
 
@@ -13,7 +14,14 @@ function Nosotros() {
 
     if (!project) {
         return (
-            <main className="min-h-screen flex items-center justify-center">
+            <main
+                className="
+                    flex
+                    min-h-screen
+                    items-center
+                    justify-center
+                "
+            >
                 <h1 className="text-3xl font-bold">
                     Proyecto no encontrado
                 </h1>
@@ -22,100 +30,46 @@ function Nosotros() {
     }
 
     return (
+
         <main
             className="
                 w-full
                 bg-slate-50
             "
-        >  
+        >
+
             <Container>
-                <div className="p-12 md:p-16">
-                    <div
+
+                <div
+                    className="
+                        px-5
+                        py-15
+                        md:px-10
+                        md:py-30
+                    "
+                >
+                    <TitleCard
+                        image={project.imageNosotros[0]}
+                        label="Proyecto"
+                        title="Espacios para disfrutar"
+                        highlight="cada momento"
+                    />
+
+                    <section
                         className="
-                            relative
-                            mt-15
-                            h-[450px]
-                            w-full
-                            overflow-hidden
-                            rounded-2xl
-                            shadow-xl
+                            mt-10
+                            grid
+                            gap-5
+                            md:grid-cols-2
                         "
                     >
-                        {/* IMAGEN */}
 
-                        <img
-                            src={project.imageNosotros[1]}
-                            alt="Nuestra empresa"
-                            className="
-                                h-full
-                                w-full
-                                object-cover
-                                transition-transform
-                                duration-700
-                                hover:scale-105
-                            "
-                        />
-
-                        {/* DEGRADADO */}
-
-                        <div
-                            className="
-                                absolute
-                                inset-0
-                                bg-black/35
-                            "
-                        />
-
-                        {/* CONTENIDO */}
-
-                        <div
-                            className="
-                                absolute
-                                inset-x-0
-                                top-0
-                                p-6
-                                md:p-10
-                            "
-                        >
-                            <span
-                                className="
-                                    text-xs
-                                    uppercase
-                                    tracking-[0.3em]
-                                    text-white
-                                "
-                            >
-                                Nuestra empresa
-                            </span>
-
-                            <h2
-                                className="
-                                    mt-3
-                                    text-3xl
-                                    font-semibold
-                                    uppercase
-                                    leading-tight
-                                    text-white
-                                    md:text-5xl
-                                "
-                            >
-                                Construimos espacios
-
-                                <span className="block text-white/60">
-                                    para vivir mejor
-                                </span>
-                            </h2>
-                        </div>
-
-                    </div>
-                    <div className="flex flex-col gap-5 flex flex-row">
+                        {/* MISIÓN */}
 
                         <article
                             className="
-                                flex-1
-                                mt-10
-                                p-10
-                                max-w-3xl
+                                p-6
+                                md:p-10
                             "
                         >
 
@@ -130,6 +84,7 @@ function Nosotros() {
                             >
                                 Nuestro propósito
                             </span>
+
                             <h2
                                 className="
                                     mt-2
@@ -141,9 +96,11 @@ function Nosotros() {
                             >
                                 Misión
                             </h2>
+
                             <p
                                 className="
                                     mt-4
+                                    max-w-2xl
                                     text-sm
                                     leading-relaxed
                                     text-gray-500
@@ -151,20 +108,24 @@ function Nosotros() {
                                 "
                             >
                                 Crear proyectos inmobiliarios de calidad,
-                                diseñados para mejorar la experiencia de quienes
-                                los habitan, ofreciendo espacios funcionales,
-                                modernos y pensados para el bienestar.
+                                diseñados para mejorar la experiencia de
+                                quienes los habitan, ofreciendo espacios
+                                funcionales, modernos y pensados para el
+                                bienestar.
                             </p>
 
                         </article>
+
+
+                        {/* VISIÓN */}
+
                         <article
                             className="
-                                flex-1
-                                mt-10
-                                p-10
-                                max-w-3xl
+                                p-6
+                                md:p-10
                             "
                         >
+
                             <span
                                 className="
                                     block
@@ -192,10 +153,11 @@ function Nosotros() {
                             <p
                                 className="
                                     mt-4
+                                    max-w-2xl
                                     text-sm
                                     leading-relaxed
-                                    md:text-base
                                     text-gray-500
+                                    md:text-base
                                 "
                             >
                                 Ser una empresa reconocida por desarrollar
@@ -206,9 +168,85 @@ function Nosotros() {
 
                         </article>
 
-                    </div>
-                    <section className="mt-10">
-                        <div className="m-10">
+                    </section>
+
+
+                    {/* =====================================
+                        EQUIPO
+                    ====================================== */}
+                    <section className="mt-16 md:mt-20 px-10">
+
+                        <div
+                            className="
+                                mb-10
+                                md:mb-12
+                            "
+                        >
+
+                            <span
+                                className="
+                                    text-xs
+                                    uppercase
+                                    tracking-[0.3em]
+                                    text-gray-500
+                                "
+                            >
+                                Las personas detrás
+                            </span>
+
+                            <h2
+                                className="
+                                    mt-2
+                                    text-3xl
+                                    font-semibold
+                                    uppercase
+                                    md:text-4xl
+                                "
+                            >
+                                Nuestro equipo
+                            </h2>
+
+                        </div>
+
+
+                        {/* FICHAS */}
+
+                        <div
+                            className="
+                                grid
+                                gap-12
+                                sm:grid-cols-2
+                                lg:grid-cols-3
+                                xl:grid-cols-4
+                            "
+                        >
+
+                            {project.equipo.map((person) => (
+
+                                <TeamCard
+                                    key={person.id}
+                                    person={person}
+                                />
+
+                            ))}
+
+                        </div>
+
+                    </section>
+                    <TitleCard
+                        image={project.imageNosotros[1]}
+                        label="Comprometidos"
+                        title="PARA BRINDARTE"
+                        highlight="UNA EXPERIENCIA INOLVIDABLE"
+                    />
+                    <section
+                        className="
+                           my-16 md:my-20 px-10
+                        "
+                    >
+
+                        <div className="mb-10">
+
                             <span
                                 className="
                                     text-xs
@@ -229,7 +267,7 @@ function Nosotros() {
                                     md:text-4xl
                                 "
                             >
-                                Nuestro Equipo
+                                Nuestros valores
                             </h2>
 
                         </div>
@@ -238,10 +276,9 @@ function Nosotros() {
                         <div
                             className="
                                 grid
-                                gap-5
+                                gap-12
                                 sm:grid-cols-2
                                 lg:grid-cols-4
-                                px-10
                             "
                         >
 
@@ -255,33 +292,18 @@ function Nosotros() {
                                 <article
                                     key={valor}
                                     className="
-                                        group
-                                        rounded-2xl
-                                        bg-white
-                                        p-6
-                                        shadow-md
-                                        transition-all
-                                        duration-500
-                                        hover:-translate-y-2
-                                        hover:shadow-xl
+                                        border-l
+                                        border-black/10
+                                        py-5
                                     "
                                 >
 
-                                    <FiHeart
-                                        className="
-                                            size-6
-                                            transition-transform
-                                            duration-500
-                                            group-hover:scale-110
-                                        "
-                                    />
-
                                     <h3
                                         className="
-                                            mt-5
                                             text-lg
                                             font-semibold
                                             uppercase
+                                            pl-6
                                         "
                                     >
                                         {valor}
@@ -293,6 +315,7 @@ function Nosotros() {
                                             text-sm
                                             leading-relaxed
                                             text-gray-500
+                                            pl-6
                                         "
                                     >
                                         Trabajamos cada detalle con

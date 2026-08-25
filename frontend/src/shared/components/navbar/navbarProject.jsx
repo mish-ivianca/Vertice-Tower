@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import Container from "../container/Container";
-
-
 function NavbarProject() {
     const { slug } = useParams();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,10 +15,7 @@ function NavbarProject() {
                 left-0
                 w-full
                 z-60
-                bg-gradient-to-b
-                from-black/55
-                via-black/20
-                to-transparent
+                bg-black/50
             "
         >
             <div

@@ -3,7 +3,8 @@ import DepartmentMap from "./DepartmentMap";
 
 function FloorPlan({ project, floor }) {
 
-    const floorImage = project.planos.floorImage;
+    // IMAGEN CORRESPONDIENTE AL PISO SELECCIONADO
+    const floorImage = floor.imagePiso;
 
     const departmentPaths =
         project.planos.departmentPaths;
@@ -14,7 +15,7 @@ function FloorPlan({ project, floor }) {
 
         const {
             naturalWidth,
-            naturalHeight
+            naturalHeight,
         } = event.target;
 
         setImageRatio(
@@ -32,6 +33,7 @@ function FloorPlan({ project, floor }) {
                 overflow-y-hidden
             "
         >
+
             <div
                 className="
                     relative
@@ -43,6 +45,7 @@ function FloorPlan({ project, floor }) {
                     justify-center
                 "
             >
+
                 <div
                     className="
                         relative
@@ -54,17 +57,23 @@ function FloorPlan({ project, floor }) {
                         aspectRatio: imageRatio || "1 / 1",
                     }}
                 >
+
+                    {/* PLANO DEL PISO */}
+
                     <img
-                    src={floorImage}
-                    alt={`Plano del piso ${floor.numero}`}
-                    onLoad={handleImageLoad}
-                    className="
-                        block
-                        w-auto
-                        h-full
-                        max-w-none
-                    "
+                        src={floorImage}
+                        alt={`Plano del piso ${floor.numero}`}
+                        onLoad={handleImageLoad}
+                        className="
+                            block
+                            h-full
+                            w-auto
+                            max-w-none
+                        "
                     />
+
+
+                    {/* DEPARTAMENTOS */}
 
                     <DepartmentMap
                         project={project}
@@ -73,7 +82,9 @@ function FloorPlan({ project, floor }) {
                     />
 
                 </div>
+
             </div>
+
         </div>
     );
 }

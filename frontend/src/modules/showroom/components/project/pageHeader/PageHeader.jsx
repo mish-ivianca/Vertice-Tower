@@ -5,10 +5,10 @@ function PageHeader({
     subtitle,
 }) {
     return (
-        <div className="pt-5 pb-2">
+        <div className="pt-10 pb-4">
 
             {/* TÍTULO */}
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-5">
 
                 {/* ICONO */}
                 <div
@@ -19,7 +19,7 @@ function PageHeader({
                         justify-center
                     "
                 >
-                    <Icon className="size-12 md:size-14" />
+                    <Icon className="size-12 md:size-18" />
                 </div>
 
                 {/* TEXTOS */}

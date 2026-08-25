@@ -1,10 +1,16 @@
-import Container from "../../../../shared/components/container/Container";
-import avances from "../../../../projects/aurora/avances";
+import Container from "../../../../shared/components/container/container";
+import projects from "../../data/projectsData";
 import AvanceMes from "../../components/project/avances/AvanceMes";
 import { MdConstruction } from "react-icons/md";
 import PageHeader from "../../components/project/pageHeader/PageHeader";
+import { useParams } from "react-router-dom";
 
 function Avances() {
+    const { slug} = useParams();
+
+    const project = projects.find(
+        project => project.slug === slug
+    )
     return (
         <main
             className="
@@ -29,7 +35,7 @@ function Avances() {
                     {/* AVANCES */}
                     <div className="mt-12 space-y-16 md:space-y-20">
 
-                        {avances.map((avance) => (
+                        {project.avances.map((avance) => (
                             <AvanceMes
                                 key={`${avance.mes}-${avance.anio}`}
                                 avance={avance}
