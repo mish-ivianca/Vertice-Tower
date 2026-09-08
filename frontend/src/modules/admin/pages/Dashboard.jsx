@@ -3,7 +3,6 @@ import { apiFetch } from "../services/api";
 import { useOutletContext } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import { MdOutlineAttachMoney } from "react-icons/md";
-import fondoJefe from "../images/fondoJefe.png";
 
 function Dashboard() {
     const { proyecto, usuario } = useOutletContext();

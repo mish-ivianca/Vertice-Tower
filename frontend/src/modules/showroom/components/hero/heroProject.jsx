@@ -104,8 +104,8 @@ function HeroProject({ project }) {
                                 h-40
                                 w-auto
                                 object-contain
-                                md:h-50
-                                lg:h-70
+                                md:h-60
+                                lg:h-90
                                 landscape:max-h-[25vh]
                                 landscape:w-auto
                             "
@@ -121,8 +121,8 @@ function HeroProject({ project }) {
                                 tracking-[0.3em]
                                 text-white/90
                                 text-xs
-                                md:text-base
-                                lg:text-lg
+                                md:text-sm
+                                lg:text-base
                             "
                         >
                             {currentStage.subtitle}
@@ -174,12 +174,12 @@ function HeroProject({ project }) {
                                     mx-auto
                                     mt-5
                                     block
-                                    h-30
+                                    h-20
                                     w-auto
                                     object-contain
                                     brightness-0
                                     invert
-                                    md:h-50
+                                    md:h-30
                                     lg:mt-10
                                     landscape:max-h-[18vh]
                                     landscape:mt-2

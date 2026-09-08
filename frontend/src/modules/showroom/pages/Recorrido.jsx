@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { getProyectoRecorrido } from "../../../services/api";
 import FloorPlan from "../components/Recorrido/FloorPlan";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import fondo from "../images/fondo.webp";
 
 function Recorrido() {
 
@@ -105,6 +106,9 @@ function Recorrido() {
                 overflow-hidden
                 bg-zinc-100
             "
+            style={{
+                backgroundImage: `url(${fondo})`,
+            }}
         >
             <div
                 className="

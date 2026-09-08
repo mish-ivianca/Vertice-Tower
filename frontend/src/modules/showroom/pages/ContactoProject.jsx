@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
-import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
-import Container from "../../../shared/components/container/container";
-import PageHeader from "../components/pageHeader/PageHeader"
 import { getContacto } from "../../../services/api";
 import { getUbicacion } from "../../../services/api";
-import Section from "../../../shared/components/section/section";
 
 function Contacto() {
     const [contacto, setContacto] = useState(null);

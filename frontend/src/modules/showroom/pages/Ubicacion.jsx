@@ -1,7 +1,5 @@
-import Container from "../../../shared/components/container/container";
 import { useEffect, useState } from "react";
 import { getUbicacion } from "../../../services/api";
-import Section from "../../../shared/components/section/section";
 
 function Ubicacion() {
 

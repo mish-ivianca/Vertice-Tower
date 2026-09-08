@@ -44,3 +44,5 @@ Thumbs.db
 
 # Archivos multimedia de Django
 media/
+# Archivos estáticos generados por Django
+staticfiles/

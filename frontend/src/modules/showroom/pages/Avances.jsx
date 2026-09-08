@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Container from "../../../shared/components/container/container";
+import Container from "../../../shared/components/container/Container";
 import AvanceMes from "../components/avances/AvanceMes";
 import { MdConstruction } from "react-icons/md";
 import PageHeader from "../components/pageHeader/PageHeader";
 import { getAvances } from "../../../services/api";
-import Section from "../../../shared/components/section/section";
+import Section from "../../../shared/components/section/Section";
 
 function Avances() {
 

@@ -1,9 +1,9 @@
-import Container from "../../../shared/components/container/container";
+import Container from "../../../shared/components/container/Container";
 import { getNosotros } from "../../../services/api";
 import TeamCard from "../components/nosotros/TeamCard";
 import TitleCard from "../components/nosotros/titleCard";
 import { useState, useEffect } from "react";
-import Section from "../../../shared/components/section/section";
+import Section from "../../../shared/components/section/Section";
 import image1 from "../images/nosotros/1.png";
 import image2 from "../images/nosotros/2.png";
 

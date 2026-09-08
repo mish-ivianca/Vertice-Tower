@@ -108,9 +108,14 @@ class EquipoAdmin(admin.ModelAdmin):
         "proyecto__nombreProyecto",
     )
 
+class ImageAvanceInline(admin.TabularInline):
+    model = ImageAvance
+    extra = 1
+
 
 @admin.register(Avance)
 class AvanceAdmin(admin.ModelAdmin):
+
     list_display = (
         "id",
         "proyecto",
@@ -118,29 +123,38 @@ class AvanceAdmin(admin.ModelAdmin):
         "anio",
         "porcentaje",
     )
+
     list_filter = (
         "proyecto",
         "anio",
         "mes",
     )
+
     search_fields = (
         "proyecto__nombreProyecto",
         "descripcion",
     )
+
     ordering = (
         "proyecto",
         "-anio",
         "-mes",
     )
 
+    inlines = [
+        ImageAvanceInline,
+    ]
+
 
 @admin.register(ImageAvance)
 class ImageAvanceAdmin(admin.ModelAdmin):
+
     list_display = (
         "id",
         "avance",
         "imagen",
     )
+
     list_filter = (
         "avance__proyecto",
     )
