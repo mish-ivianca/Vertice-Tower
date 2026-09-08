@@ -28,7 +28,7 @@ if not SECRET_KEY:
     raise ValueError("DJANGO_SECRET_KEY no está configurada")
 
 
-DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
+DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
 
 
 ALLOWED_HOSTS = [

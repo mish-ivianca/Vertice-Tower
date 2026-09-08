@@ -25,6 +25,11 @@ COPY . .
 # Crear directorios necesarios
 RUN mkdir -p /app/staticfiles /app/media
 
+# Clave placeholder solo para poder ejecutar collectstatic en build-time.
+# La real se inyecta en runtime vía variables de entorno (env_file / -e).
+ARG DJANGO_SECRET_KEY=build-time-placeholder-key
+ENV DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
+
 # Recopilar archivos estáticos
 RUN python manage.py collectstatic --noinput
 
