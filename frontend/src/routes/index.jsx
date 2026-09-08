@@ -4,88 +4,79 @@ import {
     Route
 } from "react-router-dom";
 
-import PublicLayout from "../layouts/ShowroomLayout/PublicLayout";
-import ProjectLayout from "../layouts/ShowroomLayout/projectLayout";
-
-// Sitio institucional
-import Home from "../modules/showroom/pages/Home";
-import Nosotros from "../modules/showroom/pages/Nosotros";
-import Portafolio from "../modules/showroom/pages/Portafolio";
-import Projects from "../modules/showroom/pages/Projects";
-import Contacto from "../modules/showroom/pages/Contacto";
-
-import HomeProject from "../modules/showroom/pages/projects/HomeProject";
-import Recorrido from "../modules/showroom/pages/projects/Recorrido";
-import DepartamentDetail from "../modules/showroom/pages/projects/DepartamentDetail";
-import NosotrosProject from "../modules/showroom/pages/projects/NosotrosProject";
-import Amenidades from "../modules/showroom/pages/projects/Amenidades";
-import Avances from "../modules/showroom/pages/projects/Avances";
-import Ubicacion from "../modules/showroom/pages/projects/Ubicacion";
-import ContactoProject from "../modules/showroom/pages/projects/ContactoProject";
+import ProjectLayout from "../layouts/projectLayout";
+import HomeProject from "../modules/showroom/pages/HomeProject";
+import Recorrido from "../modules/showroom/pages/Recorrido";
+import DepartamentDetail from "../modules/showroom/pages/DepartamentDetail";
+import NosotrosProject from "../modules/showroom/pages/NosotrosProject";
+import Amenidades from "../modules/showroom/pages/Amenidades";
+import Avances from "../modules/showroom/pages/Avances";
+import Ubicacion from "../modules/showroom/pages/Ubicacion";
+import ContactoProject from "../modules/showroom/pages/ContactoProject";
+import Login from "../modules/admin/pages/Login";
+import Dashboard from "../modules/admin/pages/Dashboard";
+import ProtectedRoute from "../modules/admin/components/ProtectedRoute";
+import Historial from "../modules/admin/pages/Historial";
+import AdminLayout from "../modules/admin/components/AdminLayout";
+import Usuarios from "../modules/admin/pages/Usuario";
 
 function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route
-                    element={<PublicLayout />}
-                >
-                    <Route
-                        path="/"
-                        element={<Home />}
-                    />
-                    <Route
-                        path="/nosotros"
-                        element={<Nosotros />}
-                    />
-                    <Route
-                        path="/portafolio"
-                        element={<Portafolio />}
-                    />
-                    <Route
-                        path="/portal-comercial"
-                        element={<Projects />}
-                    />
-
-                    <Route
-                        path="/contacto"
-                        element={<Contacto />}
-                    />
+               <Route
+                    path="/admin/login"
+                    element={<Login />}
+                />
+                <Route element={<ProtectedRoute />}>
+                    <Route element={<AdminLayout />}>
+                        <Route
+                            path="/admin"
+                            element={<Dashboard />}
+                        />
+                        <Route
+                            path="/admin/historial"
+                            element={<Historial />}
+                        />
+                        <Route
+                            path="/admin/usuarios"
+                            element={<Usuarios />}
+                        />
+                    </Route>
                 </Route>
-
                 <Route
                     element={<ProjectLayout />}
                 >
                     <Route
-                        path="/portal-comercial/:slug"
+                        path="/"
                         element={<HomeProject />}
                     />
                     <Route
-                        path="/portal-comercial/:slug/recorrido"
+                        path="/recorrido"
                         element={<Recorrido />}
                     />
                     <Route
-                        path="/portal-comercial/:slug/recorrido/:codigo"
+                        path="/recorrido/:floorId/:codigo"
                         element={<DepartamentDetail />}
                     />
                     <Route
-                        path="/portal-comercial/:slug/nosotros"
+                        path="/nosotros"
                         element={<NosotrosProject />}
                     />
                     <Route
-                        path="/portal-comercial/:slug/amenidades"
+                        path="/amenidades"
                         element={<Amenidades />}
                     />
                     <Route
-                        path="/portal-comercial/:slug/avances"
+                        path="/avances"
                         element={<Avances />}
                     />
                     <Route
-                        path="/portal-comercial/:slug/ubicacion"
+                        path="/ubicacion"
                         element={<Ubicacion/>}
                     />
                     <Route
-                        path="/portal-comercial/:slug/contacto"
+                        path="/contacto"
                         element={<ContactoProject />}
                     />
                 </Route>

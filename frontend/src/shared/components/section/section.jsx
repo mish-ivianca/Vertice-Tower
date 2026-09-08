@@ -2,14 +2,12 @@ function Section({
     children,
     className=""
 }) {
-
     return (
-
         <section
             className={`
-                py-12
-                md:py-16
-                lg:py-20
+                py-15
+                md:px-10
+                md:py-30
                 ${className}
             `}
         >
@@ -17,9 +15,6 @@ function Section({
             {children}
 
         </section>
-
     )
-
 }
-
 export default Section;

@@ -1,0 +1,104 @@
+export const API_URL = import.meta.env.VITE_API_URL;
+
+export async function getProyecto() {
+
+    const response = await fetch(
+        `${API_URL}/proyectos/`
+    );
+
+    if (!response.ok) {
+        throw new Error(
+            "No se pudo obtener el proyecto"
+        );
+    }
+
+    const data = await response.json();
+
+    return data[0];
+}
+export async function getProyectoRecorrido() {
+
+    const response = await fetch(
+        `${API_URL}/proyectos/1/recorrido/`
+    );
+
+    if (!response.ok) {
+        throw new Error(
+            "No se pudo obtener el recorrido"
+        );
+    }
+
+    return response.json();
+}
+export async function getProyectoBase() {
+
+    const response = await fetch(
+        `${API_URL}/proyectos/1/empresa/`
+    );
+
+    if (!response.ok) {
+        throw new Error(
+            "No se pudo obtener el recorrido"
+        );
+    }
+
+    return response.json();
+}
+export async function getNosotros() {
+    const response = await fetch(
+         `${API_URL}/proyectos/1/nosotros/`
+    );
+
+    if (!response.ok) {
+        throw new Error("Error al obtener Nosotros");
+    }
+
+    return response.json();
+}
+
+export async function getProyectoHero() {
+    const response = await fetch(
+         `${API_URL}/proyectos/1/hero/`
+    );
+
+    if (!response.ok) {
+        throw new Error("Error al obtener el Hero");
+    }
+
+    return await response.json();
+}
+
+export async function getAvances() {
+    const response = await fetch(
+         `${API_URL}/proyectos/1/avances/`
+    );
+
+    if (!response.ok) {
+        throw new Error("Error al obtener los avances");
+    }
+
+    return response.json();
+}
+
+export async function getUbicacion() {
+    const response = await fetch(
+         `${API_URL}/proyectos/1/ubicacion/`
+    );
+
+    if (!response.ok) {
+        throw new Error("Error al obtener los ubicacion");
+    }
+
+    return response.json();
+}
+export async function getContacto() {
+    const response = await fetch(
+         `${API_URL}/proyectos/1/contacto/`
+    );
+
+    if (!response.ok) {
+        throw new Error("Error al obtener los contacto");
+    }
+
+    return response.json();
+}

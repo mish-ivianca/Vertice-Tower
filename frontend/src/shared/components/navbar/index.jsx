@@ -1,1 +1,1 @@
-export {default} from "./navbarPublic";
+export {default} from "./navbarProject";

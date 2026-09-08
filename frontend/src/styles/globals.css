@@ -42,9 +42,176 @@ body {
 
 .menu-link::after {
     content: "";
-    @apply absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300;
+    @apply absolute bottom-0 left-0 h-px w-0 bg-[var(--color-naranja)] transition-all duration-300;
 }
 
 .menu-link:hover::after {
     width: 100%;
+}
+.table-header {
+    @apply px-5 py-4 text-xs md:text-sm font-medium uppercase tracking-widest;
+}
+.table-body {
+    @apply whitespace-nowrap px-5 py-4 text-xs md:text-sm text-gray-600;
+}
+/* From Uiverse.io by gharsh11032000 */ 
+.animated-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 4px;
+  padding: 12px 35px;
+  border: 4px solid;
+  border-color: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  text-shadow: 1px 1px 0.8px #0000006b;
+  background-color: inherit;
+  border-radius: 100px;
+ 
+  color: var(--color-white);
+  box-shadow: 0 0 0 2px var(--color-naranja);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button svg {
+  position: absolute;
+  width: 24px;
+  fill: var(--color-white);
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .arr-1 {
+  right: 16px;
+  stroke-width: 1.5;
+}
+
+.animated-button .arr-2 {
+  left: -25%;
+  stroke-width: 1.5;
+}
+
+.animated-button .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-naranja);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button:hover {
+  box-shadow: 0 0 0 12px transparent;
+  color: var(--color-white);
+  border-radius: 12px;
+}
+
+.animated-button:hover .arr-1 {
+  right: -25%;
+}
+
+.animated-button:hover .arr-2 {
+  left: 16px;
+}
+
+.animated-button:hover .text {
+  transform: translateX(12px);
+}
+
+.animated-button:active {
+  scale: 0.95;
+  box-shadow: 0 0 0 4px var(--color-naranja);
+}
+
+.animated-button:hover .circle {
+  width: 250px;
+  height: 250px;
+  opacity: 1;
+}
+
+.unit-pulse {
+    animation: unitPulse 1.5s ease-in-out infinite;
+}
+@media screen and (orientation: landscape) and (max-height: 500px) {
+
+    .animated-button {
+        padding: 7px 20px;
+        font-size: 15px;
+        font-weight: 400;
+        border-width: 2px;
+        gap: 2px;
+    }
+
+    .animated-button svg {
+        width: 15px;
+    }
+
+    .animated-button .arr-1 {
+        right: 8px;
+    }
+
+    .animated-button .text {
+        transform: translateX(-6px);
+    }
+}
+@media (max-width: 520px) {
+
+    .animated-button {
+        padding: 12px 26px;
+        font-size: 13px;
+        border-width: 3px;
+        gap: 3px;
+    }
+
+    .animated-button svg {
+        width: 20px;
+    }
+
+    .animated-button .arr-1 {
+        right: 12px;
+    }
+
+    .animated-button .text {
+        transform: translateX(-9px);
+    }
+
+    .animated-button:active {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 3px var(--color-naranja);
+    }
+
+}
+
+@keyframes unitPulse {
+    0% {
+        opacity: 0;
+    }
+
+    35% {
+        opacity: 0.65;
+    }
+
+    65% {
+        opacity: 0.65;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }

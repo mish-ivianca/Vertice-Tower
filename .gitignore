@@ -41,3 +41,6 @@ __pycache__/
 # Base de datos local
 *.sqlite3
 Thumbs.db
+
+# Archivos multimedia de Django
+media/

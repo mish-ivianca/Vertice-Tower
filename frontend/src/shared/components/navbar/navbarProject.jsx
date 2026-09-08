@@ -1,31 +1,57 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { getProyectoBase } from "../../../services/api";
+
+const menuItems = [
+    { label: "Home", path: "/" },
+    { label: "Nosotros", path: "/nosotros" },
+    { label: "Recorrido", path: "/recorrido" },
+    { label: "Amenidades", path: "/amenidades" },
+    { label: "Avances", path: "/avances" },
+    { label: "Ubicación", path: "/ubicacion" },
+    { label: "Contáctanos", path: "/contacto" },
+];
 
 function NavbarProject() {
-    const { slug } = useParams();
+    const [project, setProject] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const closeMenu = () => {
-        setIsMenuOpen(false);
-    };
+
+    useEffect(() => {
+        const cargarNavbar = async () => {
+            try {
+                const data = await getProyectoBase();
+                setProject(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        cargarNavbar();
+    }, []);
+
+    const closeMenu = () => setIsMenuOpen(false);
+
     return (
         <header
             className="
                 fixed
                 top-0
                 left-0
-                w-full
                 z-60
-                bg-black/50
+                w-full
+                h-15
+                lg:h-17
+                bg-black/60
+                justify-center
             "
         >
-            <div
-            className={`
+            <div className="
                 max-w-8xl
                 mx-auto
-                md:px-10
+                px-0
+                md:px-3
                 lg:px-20
-            `}
-        >
+            ">
                 <nav
                     className="
                         relative
@@ -35,36 +61,46 @@ function NavbarProject() {
                         p-3
                     "
                 >
-                    {/* LOGO */}
                     <Link
-                        to={`/portal-comercial/${slug}`}
+                        to="/"
                         onClick={closeMenu}
                         className="
+                            flex
+                            items-center
+                            pl-2
                             text-xl
                             font-bold
                             text-stone-50
-                            pl-2
                             md:pl-0
                         "
                     >
-                        LOGO
+                        <img
+                            src={project?.empresa.logo1}
+                            alt={project?.empresa.nombre}
+                            className="
+                                h-8
+                                lg:h-10
+                                w-auto
+                                max-w-[180px]
+                                object-contain
+                            "
+                        />
                     </Link>
+
                     {/* BOTÓN HAMBURGUESA */}
                     <button
                         type="button"
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        onClick={() => setIsMenuOpen((open) => !open)}
                         className="
                             flex
                             flex-col
                             gap-1.5
-                            md:hidden
-                            text-stone-50
                             pr-2
+                            text-stone-50
+                            md:hidden
                         "
                         aria-label={
-                            isMenuOpen
-                                ? "Cerrar menú"
-                                : "Abrir menú"
+                            isMenuOpen ? "Cerrar menú" : "Abrir menú"
                         }
                         aria-expanded={isMenuOpen}
                     >
@@ -76,12 +112,14 @@ function NavbarProject() {
                                 bg-current
                                 transition
                                 duration-300
-                                ${isMenuOpen
-                                    ? "translate-y-2 rotate-45"
-                                    : ""
+                                ${
+                                    isMenuOpen
+                                        ? "translate-y-2 rotate-45"
+                                        : ""
                                 }
                             `}
                         />
+
                         <span
                             className={`
                                 block
@@ -90,12 +128,10 @@ function NavbarProject() {
                                 bg-current
                                 transition
                                 duration-300
-                                ${isMenuOpen
-                                    ? "opacity-0"
-                                    : ""
-                                }
+                                ${isMenuOpen ? "opacity-0" : ""}
                             `}
                         />
+
                         <span
                             className={`
                                 block
@@ -104,70 +140,54 @@ function NavbarProject() {
                                 bg-current
                                 transition
                                 duration-300
-                                ${isMenuOpen
-                                    ? "-translate-y-2 -rotate-45"
-                                    : ""
+                                ${
+                                    isMenuOpen
+                                        ? "-translate-y-2 -rotate-45"
+                                        : ""
                                 }
                             `}
                         />
                     </button>
-                    {/* MENU ESCRITORIO */}
+
+                    {/* MENÚ DESKTOP */}
                     <div
                         className="
                             hidden
-                            md:flex
                             items-center
-                            gap-8
-                            text-sm
+                            gap-6
+                            lg:gap-8
+                            text-xs
+                            md:text-sm
                             text-stone-50
+                            md:flex
                         "
                     >
-                        <Link to={`/portal-comercial/${slug}`} className="menu-link">
-                            Home
-                        </Link>
-
-                        <Link to={`/portal-comercial/${slug}/nosotros`} className="menu-link">
-                            Nosotros
-                        </Link>
-
-                        <Link to={`/portal-comercial/${slug}/recorrido`} className="menu-link">
-                            Recorrido
-                        </Link>
-
-                        <Link to={`/portal-comercial/${slug}/amenidades`} className="menu-link">
-                            Amenidades
-                        </Link>
-
-                        <Link to={`/portal-comercial/${slug}/avances`} className="menu-link">
-                            Avances
-                        </Link>
-
-                        <Link to={`/portal-comercial/${slug}/ubicacion`} className="menu-link">
-                            Ubicación
-                        </Link>
-
-                        <Link to={`/portal-comercial/${slug}/contacto`} className="menu-link">
-                            Contáctanos
-                        </Link>
-
+                        {menuItems.map((item) => (
+                            <Link
+                                key={item.path}
+                                to={item.path}
+                                className="menu-link"
+                            >
+                                {item.label}
+                            </Link>
+                        ))}
                     </div>
 
-
-                    {/* MENU MÓVIL */}
+                    {/* MENÚ MÓVIL */}
                     <div
                         className={`
                             absolute
                             right-0
-                            top-full
+                            top-15
                             z-1000
-                            w-[180px]
-                            bg-slate-50
-                            shadow-xl
-                            md:hidden
+                            w-[140px]
                             overflow-hidden
+                            rounded-bl-lg
+                            bg-black/65
+                            shadow-xl
                             transition-all
                             duration-300
-                            rounded-l-lg
+                            md:hidden
                             ${
                                 isMenuOpen
                                     ? "max-h-96 opacity-100"
@@ -178,110 +198,37 @@ function NavbarProject() {
                         <div
                             className="
                                 flex
+                                max-h-[80vh]
                                 flex-col
-                                py-1
-                                max-h-[83vh]
                                 overflow-y-auto
+                                py-1
                             "
                         >
-                            <Link
-                                to={`/portal-comercial/${slug}`}
-                                onClick={closeMenu}
-                                className="
-                                    p-4
-                                    text-sm
-                                    text-slate-900
-                                    hover:bg-slate-50
-                                    
-                                "
-                            >
-                                Home
-                            </Link>
-                            <Link
-                                to={`/portal-comercial/${slug}/nosotros`}
-                                onClick={closeMenu}
-                                className="
-                                    px-4
-                                    py-3
-                                    text-sm
-                                    text-slate-900
-                                    hover:bg-slate-50
-                                "
-                            >
-                                Nosotros
-                            </Link>
-                            <Link
-                                to={`/portal-comercial/${slug}/recorrido`}
-                                onClick={closeMenu}
-                                className="
-                                    px-4
-                                    py-3
-                                    text-sm
-                                    text-slate-900
-                                    hover:bg-slate-50
-                                "
-                            >
-                                Recorrido
-                            </Link>
-                            <Link
-                                to={`/portal-comercial/${slug}/amenidades`}
-                                onClick={closeMenu}
-                                className="
-                                    px-4
-                                    py-3
-                                    text-sm
-                                    text-slate-900
-                                    hover:bg-slate-50
-                                "
-                            >
-                                Amenidades
-                            </Link>
-                            <Link
-                                to={`/portal-comercial/${slug}/avances`}
-                                onClick={closeMenu}
-                                className="
-                                    px-4
-                                    py-3
-                                    text-sm
-                                    text-slate-900
-                                    hover:bg-slate-50
-                                "
-                            >
-                                Avances
-                            </Link>
-                            <Link
-                                to={`/portal-comercial/${slug}/ubicacion`}
-                                onClick={closeMenu}
-                                className="
-                                    px-4
-                                    py-3
-                                    text-sm
-                                    text-slate-900
-                                    hover:bg-slate-50
-                                "
-                            >
-                                Ubicación
-                            </Link>
-                            <Link
-                                to={`/portal-comercial/${slug}/contacto`}
-                                onClick={closeMenu}
-                                className="
-                                    px-4
-                                    py-3
-                                    text-sm
-                                    text-slate-900
-                                    hover:bg-slate-50
-                                "
-                            >
-                                Contáctanos
-                            </Link>
+                            {menuItems.map((item) => (
+                                <Link
+                                    key={item.path}
+                                    to={item.path}
+                                    onClick={closeMenu}
+                                    className="
+                                        px-4
+                                        py-3
+                                        text-right
+                                        text-sm
+                                        text-slate-50
+                                        hover:bg-slate-50
+                                        hover:text-black
+                                        text-shadow-lg
+                                    "
+                                >
+                                    {item.label}
+                                </Link>
+                            ))}
                         </div>
                     </div>
                 </nav>
             </div>
-
         </header>
-
     );
 }
+
 export default NavbarProject;

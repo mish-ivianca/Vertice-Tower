@@ -1,12 +1,13 @@
 :root {
     
     /* COLORES BASE */
-    --color-white:#FFFFFF;
+    --color-white:#f7f7f7;
     --color-black:#0F0F0F;
     --color-text:#1A1A1A;
     --color-text-light:#666666;
     --color-verde: #5BDA4A;
     --color-rojo: #DA4A4A;
+    --color-naranja:#f76b00;
 
     /* OVERLAY */
     --color-overlay:rgba(0,0,0,.45);

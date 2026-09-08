@@ -1,0 +1,37 @@
+from django.urls import path
+from .views import (
+    ProyectoListView,
+    ProyectoNosotrosView,
+    ProyectoHeroView,
+    ProyectoAvancesView,
+    ProyectoUbicacionView,
+    ProyectoContactoView,
+    ProyectoRecorridoView,
+    ProyectoBaseView,
+    UnidadListView,
+    UnidadEstadoUpdateView,
+    HistorialEstadoUnidadListView,
+    UsuarioActualView,
+    UsuarioListCreateView,
+    UsuarioDetailView,
+    UnidadPrecioUpdateView,
+)
+
+
+urlpatterns = [
+    path("", ProyectoListView.as_view()),
+    path("<int:pk>/recorrido/", ProyectoRecorridoView.as_view()),
+    path("<int:pk>/empresa/", ProyectoBaseView.as_view()),
+    path("<int:pk>/nosotros/", ProyectoNosotrosView.as_view()),
+    path("<int:pk>/hero/", ProyectoHeroView.as_view()),
+    path("<int:pk>/avances/", ProyectoAvancesView.as_view()),
+    path("<int:pk>/ubicacion/", ProyectoUbicacionView.as_view()),
+    path("<int:pk>/contacto/", ProyectoContactoView.as_view()),
+    path("unidades/", UnidadListView.as_view(), name="unidades"),
+    path("unidades/<int:pk>/estado/", UnidadEstadoUpdateView.as_view(), name="unidad-estado"),
+    path("historial/", HistorialEstadoUnidadListView.as_view(), name="historial"),
+    path("usuario/", UsuarioActualView.as_view(), name="usuario-actual"),
+    path("usuarios/",UsuarioListCreateView.as_view(),name="usuarios"),
+    path("usuarios/<int:pk>/",UsuarioDetailView.as_view(),name="usuario-detail"),
+    path("unidades/<int:pk>/precio/",UnidadPrecioUpdateView.as_view(),),
+]
