@@ -22,6 +22,7 @@ function HeroBackground({
             autoPlay
             loop={loop}
             playsInline
+            preload="auto"
             onTimeUpdate={onTimeUpdate}
             className="
                 absolute
