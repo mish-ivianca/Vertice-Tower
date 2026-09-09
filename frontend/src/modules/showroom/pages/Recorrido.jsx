@@ -266,7 +266,7 @@ function Recorrido() {
                                 absolute
                                 right-0
                                 mt-2
-                                w-25
+                                w-20
                                 lg:w-22
                                 rounded-lg
                                 border
@@ -298,7 +298,8 @@ function Recorrido() {
                                             py-1.5
                                             my-0.5
                                             text-center
-                                            text-base
+                                            text-xs
+                                            lg:text-base
                                             transition
                                             ${
                                                 selectedFloor.id === piso.id

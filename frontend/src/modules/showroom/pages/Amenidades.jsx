@@ -101,8 +101,7 @@ function Amenidades() {
                             className={`
                                 rounded-full
                                 p-1
-                                w-[100px]
-                                md:w-auto
+                                w-auto
                                 md:px-5
                                 md:py-2
                                 text-[9px]
