@@ -266,7 +266,7 @@ function Recorrido() {
                                 absolute
                                 right-0
                                 mt-2
-                                w-20
+                                w-18
                                 lg:w-22
                                 rounded-lg
                                 border
@@ -298,7 +298,7 @@ function Recorrido() {
                                             py-1.5
                                             my-0.5
                                             text-center
-                                            text-xs
+                                            text-[10px]
                                             lg:text-base
                                             transition
                                             ${
