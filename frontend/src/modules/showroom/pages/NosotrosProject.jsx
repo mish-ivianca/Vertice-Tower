@@ -1,7 +1,7 @@
 import Container from "../../../shared/components/container/Container";
 import { getNosotros } from "../../../services/api";
 import TeamCard from "../components/nosotros/TeamCard";
-import TitleCard from "../components/nosotros/titleCard";
+import TitleCard from "../components/nosotros/TitleCard";
 import { useState, useEffect } from "react";
 import Section from "../../../shared/components/section/Section";
 import image1 from "../images/nosotros/1.png";

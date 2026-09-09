@@ -1,1 +1,1 @@
-export {default} from "./projectLayout";
+export {default} from "./ProjectLayout";

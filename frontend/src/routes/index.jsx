@@ -4,7 +4,7 @@ import {
     Route
 } from "react-router-dom";
 
-import ProjectLayout from "../layouts/projectLayout";
+import ProjectLayout from "../layouts/ProjectLayout";
 import HomeProject from "../modules/showroom/pages/HomeProject";
 import Recorrido from "../modules/showroom/pages/Recorrido";
 import DepartamentDetail from "../modules/showroom/pages/DepartamentDetail";
