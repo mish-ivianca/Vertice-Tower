@@ -55,6 +55,7 @@ function HeroProject({ project }) {
             <HeroBackground
                 desktopVideo={currentStage.desktop}
                 loop={stage === 0 || stage === 1}
+                muted={stage === 0}
                 onTimeUpdate={handleTimeUpdate}
             />
 

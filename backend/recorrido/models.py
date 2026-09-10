@@ -18,6 +18,9 @@ def unidad_frame_path(instance, filename):
 def unidad_galeria_path(instance, filename):
     return f"unidades/{instance.tipoUnidad.codigo}/galeria/{filename}"
 
+def tipo_unidad_ficha_path(instance, filename):
+    return f"unidades/{instance.codigo}/ficha/{filename}"
+
 class CategoriaUnidad(models.Model):
 
     nombre = models.CharField(
@@ -111,6 +114,12 @@ class TipoUnidad(models.Model):
     )
 
     tour360 = models.URLField(
+        blank=True,
+        null=True
+    )
+
+    fichaTecnica = models.ImageField(
+        upload_to=tipo_unidad_ficha_path,
         blank=True,
         null=True
     )

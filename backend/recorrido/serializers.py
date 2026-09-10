@@ -77,6 +77,7 @@ class TipoUnidadSerializer(serializers.ModelSerializer):
             "x",
             "y",
             "galeria",
+            "fichaTecnica"
         ]
 
 # ============================================================

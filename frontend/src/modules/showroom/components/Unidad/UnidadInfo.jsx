@@ -9,44 +9,47 @@ import UnidadCaracteristica from "../../components/Unidad/UnidadCaracteristica";
 import { MdOutlineChair } from "react-icons/md";
 import { PiWashingMachine } from "react-icons/pi";
 import { TbPicnicTable } from "react-icons/tb";
+import { useState } from "react";
+import { descargarFichaTecnica } from "../../../../services/api";
 
 function UnidadInfo({ project, unidad, floor }) {
-
+    const [descargandoFicha, setDescargandoFicha] = useState(false);
     const tipoUnidad = unidad.tipoUnidad;
 
-    const getStatus = (estado) => {
+    const statusStyle = {
+    1: "bg-green-100 text-green-700",
+    2: "bg-red-100 text-red-700",
+};
 
-        switch (estado) {
+    const statusNombre = unidad.estadoNombre;
 
-            case 1:
-                return {
-                    nombre: "Disponible",
-                    style: "bg-green-100 text-green-700",
-                };
-
-            case 2:
-                return {
-                    nombre: "Vendido",
-                    style: "bg-red-100 text-red-700",
-                };
-
-            default:
-                return {
-                    nombre: "No disponible",
-                    style: "bg-slate-100 text-slate-600",
-                };
+    const handleDescargarFicha = async () => {
+        if (descargandoFicha) return;
+        try {
+            setDescargandoFicha(true);
+            const blob = await descargarFichaTecnica(unidad.id);
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download =`fichaTecnica-${tipoUnidad?.codigo}-Piso${floor.numero}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error(
+                "Error al descargar la ficha técnica:",
+                error
+            );
+        } finally {
+            setDescargandoFicha(false);
         }
     };
 
-    const status = getStatus(unidad.estado);
-
-    const whatsappMessage =
-        `Hola, estoy interesada en el departamento ${tipoUnidad?.codigo} del piso ${floor.numero}°. Me podría brindar más información.`;
-
-    const whatsappUrl =
-        `${project.contacto?.whatsappLink}?text=${encodeURIComponent(
-            whatsappMessage
-        )}`;
+    const whatsappMessage = `Hola, estoy interesada en el departamento ${tipoUnidad?.codigo} del piso ${floor.numero}°. Me podría brindar más información.`;
+    const whatsappUrl = `https://wa.me/${project.contacto?.numeroContacto}?text=${encodeURIComponent(
+        whatsappMessage
+    )}`;
 
     const caracteristicas = [
         {
@@ -131,7 +134,8 @@ function UnidadInfo({ project, unidad, floor }) {
 
                 <p
                     className="
-                        mt-2
+                        mt-1
+                        md:mt-2
                         text-sm
                         text-slate-500
                         uppercase
@@ -150,7 +154,10 @@ function UnidadInfo({ project, unidad, floor }) {
                     "
                 >
                     {unidad.precio != null
-                        ? Number(unidad.precio).toLocaleString("es-BO")
+                        ? Number(unidad.precio).toLocaleString("es-BO", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                        })
                         : "Consultar"
                     }
 
@@ -158,20 +165,20 @@ function UnidadInfo({ project, unidad, floor }) {
                         <> {unidad.tipoMoneda}</>
                     )}
                 </p>
-
                 <span
                     className={`
                         inline-block
                         rounded-full
                         px-4
                         py-1
-                        mt-3
+                        mt-2.5
+                        md:mt-3
                         text-sm
                         font-medium
-                        ${status.style}
+                        ${statusStyle[unidad.estado] ?? "bg-slate-100 text-slate-600"}
                     `}
                 >
-                    {status.nombre}
+                    {statusNombre ?? "No disponible"}
                 </span>
 
             </div>
@@ -282,7 +289,7 @@ function UnidadInfo({ project, unidad, floor }) {
                         className="
                             flex
                             gap-2
-                            m-2
+                            m-1
                             items-center
                             justify-center
                             rounded-full
@@ -291,7 +298,7 @@ function UnidadInfo({ project, unidad, floor }) {
                             text-sm
                             text-white
                             transition
-                            hover:bg-slate-700
+                            hover:bg-slate-900
                             animate-pulse
                             shadow-lg
                         "
@@ -302,6 +309,36 @@ function UnidadInfo({ project, unidad, floor }) {
                         Solicitar información
 
                     </a>
+                                        <button
+                        type="button"
+                        onClick={handleDescargarFicha}
+                        disabled={descargandoFicha}
+                        className="
+                            flex
+                            gap-2
+                            m-1
+                            items-center
+                            justify-center
+                            rounded-full
+                            bg-[var(--color-naranja)]
+                            p-2
+                            text-sm
+                            text-white
+                            transition
+                            hover:bg-slate-900
+                            shadow-lg
+                            disabled:cursor-not-allowed
+                            disabled:opacity-60
+                        "
+                    >
+                        <VscFilePdf className="size-5" />
+
+                        {descargandoFicha
+                            ? "Generando ficha..."
+                            : "Ficha técnica"
+                        }
+
+                    </button>
 
                     <a
                         href={project.brochure}
@@ -309,26 +346,25 @@ function UnidadInfo({ project, unidad, floor }) {
                         className="
                             flex
                             gap-2
-                            m-2
+                            m-1
                             items-center
                             justify-center
                             rounded-full
-                            bg-black
+                            bg-[var(--color-naranja)]
                             p-2
                             text-sm
                             text-white
                             transition
-                            hover:bg-slate-700
+                            hover:bg-slate-900
                             shadow-lg
                         "
                     >
 
                         <VscFilePdf className="size-5" />
 
-                        Descargar PDF
+                        Brochure
 
                     </a>
-
             </div>
 
         </aside>

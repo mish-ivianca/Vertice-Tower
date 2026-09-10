@@ -1,9 +1,19 @@
+from io import BytesIO
+
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.models import User, Group
 from .permissions import EsAdministrador
+from pathlib import Path
+from reportlab.pdfgen import canvas
+from reportlab.lib.utils import ImageReader
+from reportlab.lib.colors import HexColor
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 
 from .models import Proyecto
 from .serializers import (
@@ -181,3 +191,131 @@ class UsuarioDetailView(generics.RetrieveUpdateDestroyAPIView):
         IsAuthenticated,
         EsAdministrador
     ]
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+pdfmetrics.registerFont(
+    TTFont(
+        "Hilmar-SemiBold",
+        BASE_DIR / "fonts" / "Hilmar-SemiBold.ttf"
+    )
+)
+
+pdfmetrics.registerFont(
+    TTFont(
+        "Hilmar-SemiBold",
+        BASE_DIR / "fonts" / "Hilmar-SemiBold.ttf"
+    )
+)
+class UnidadFichaTecnicaView(APIView):
+
+    permission_classes = [AllowAny]
+
+    def get(self, request, pk):
+
+        unidad = get_object_or_404(
+            Unidad.objects.select_related(
+                "piso",
+                "tipoUnidad",
+                "piso__proyecto",
+            ),
+            pk=pk
+        )
+
+        tipo_unidad = unidad.tipoUnidad
+
+        if not tipo_unidad.fichaTecnica:
+            return HttpResponse(
+                "Esta unidad no tiene una ficha técnica configurada.",
+                status=404
+            )
+
+        IMAGE_WIDTH = 2548
+        IMAGE_HEIGHT = 4340
+
+        PAGE_WIDTH = 595.28
+
+        PAGE_HEIGHT = (
+            PAGE_WIDTH * IMAGE_HEIGHT / IMAGE_WIDTH
+        )
+
+        SCALE = PAGE_WIDTH / IMAGE_WIDTH
+
+        piso = unidad.piso.numero
+        codigo = tipo_unidad.codigo
+        precio = unidad.precio
+
+        moneda = dict(
+            Unidad.MONEDAS
+        ).get(
+            unidad.moneda,
+            ""
+        )
+
+        buffer = BytesIO()
+
+        pdf = canvas.Canvas(
+            buffer,
+            pagesize=(
+                PAGE_WIDTH,
+                PAGE_HEIGHT
+            )
+        )
+
+        imagen = ImageReader(
+            tipo_unidad.fichaTecnica.path
+        )
+
+        pdf.drawImage(
+            imagen,
+            0,
+            0,
+            width=PAGE_WIDTH,
+            height=PAGE_HEIGHT
+        )
+
+        precio_x = 390 * SCALE
+        precio_y = PAGE_HEIGHT - (3985 * SCALE)
+
+        pdf.setFillColor(
+            HexColor("#FFFFFF")
+        )
+
+        pdf.setFont(
+            "Hilmar-SemiBold",
+            70 * SCALE
+        )
+
+        pdf.drawString(
+            precio_x,
+            precio_y,
+            f"{precio:,.2f} {moneda}"
+        )
+
+        piso_x = 2330 * SCALE
+        piso_y = PAGE_HEIGHT - (260 * SCALE)
+
+        pdf.setFont("Hilmar-SemiBold",150 * SCALE)
+
+        pdf.drawString(
+            piso_x,
+            piso_y,
+            f"{piso}"
+        )
+
+        pdf.showPage()
+        pdf.save()
+
+        buffer.seek(0)
+
+        response = HttpResponse(
+            buffer.getvalue(),
+            content_type="application/pdf"
+        )
+
+        response["Content-Disposition"] = (
+            f'attachment; '
+            f'filename="fichaTecnica-{codigo}-Piso{piso}.pdf"'
+        )
+
+        return response

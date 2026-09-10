@@ -30,6 +30,20 @@ export async function getProyectoRecorrido() {
 
     return response.json();
 }
+export async function descargarFichaTecnica(unidadId) {
+
+    const response = await fetch(
+        `${API_URL}/proyectos/unidades/${unidadId}/ficha-tecnica/`
+    );
+
+    if (!response.ok) {
+        throw new Error(
+            "No se pudo descargar la ficha técnica"
+        );
+    }
+
+    return response.blob();
+}
 export async function getProyectoBase() {
 
     const response = await fetch(

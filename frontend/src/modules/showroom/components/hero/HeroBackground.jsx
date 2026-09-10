@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 function HeroBackground({
     desktopVideo,
     loop = false,
+    muted = false,
     onTimeUpdate,
 }) {
     const videoRef = useRef(null);
@@ -10,9 +11,12 @@ function HeroBackground({
     useEffect(() => {
         if (videoRef.current) {
             videoRef.current.currentTime = 0;
-            videoRef.current.play();
+            videoRef.current.muted = muted;
+            videoRef.current.play().catch((error) => {
+                console.log("No se pudo reproducir el video:", error);
+            });
         }
-    }, [desktopVideo]);
+    }, [desktopVideo, muted]);
 
     return (
         <video
@@ -20,6 +24,7 @@ function HeroBackground({
             key={desktopVideo}
             src={desktopVideo}
             autoPlay
+            muted={muted}
             loop={loop}
             playsInline
             preload="auto"
