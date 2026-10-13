@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { getProyectoRecorrido } from "../../../services/api";
 import Recorrido360 from "../components/Recorrido/Recorrido360";
+import ProjectLoader from "../../../shared/components/loaders/ProjectLoader";
 
 function Amenidades() {
     const [amenidades, setAmenidades] = useState([]);
@@ -47,11 +48,7 @@ function Amenidades() {
     }, []);
 
     if (loading) {
-        return (
-            <main className="flex min-h-screen items-center justify-center">
-                <p>Amenidades de Vertice Tower</p>
-            </main>
-        );
+        return <ProjectLoader text="PREPARANDO AMENIDADES"/>
     }
 
     if (amenidades.length === 0) {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { getUbicacion } from "../../../services/api";
+import ProjectLoader from "../../../shared/components/loaders/ProjectLoader";
 
 function Ubicacion() {
 
@@ -22,20 +23,7 @@ function Ubicacion() {
     }, []);
 
     if (loading) {
-        return (
-            <main
-                className="
-                    flex
-                    min-h-screen
-                    items-center
-                    justify-center
-                "
-            >
-                <p>
-                    Cargando ubicación...
-                </p>
-            </main>
-        );
+        return <ProjectLoader text="PREPARANDO UBICACION"/>
     }
 
     if (!ubicacion) {

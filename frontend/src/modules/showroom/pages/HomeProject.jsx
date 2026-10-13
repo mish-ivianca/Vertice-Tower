@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { getProyectoHero } from "../../../services/api";
+import ProjectLoader from "../../../shared/components/loaders/ProjectLoader";
 
 function HomeProject() {
     const { project: projectBase } = useOutletContext();
@@ -20,12 +21,9 @@ function HomeProject() {
     }, []);
 
     if (!project) {
-        return (
-            <div className="flex min-h-screen items-center justify-center">
-                <p>Cargando...</p>
-            </div>
-        );
+        return <ProjectLoader text="PREPARANDO HOME"/>
     }
+
     return (
         <>
             <Helmet>

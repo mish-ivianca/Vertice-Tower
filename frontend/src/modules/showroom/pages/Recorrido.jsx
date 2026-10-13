@@ -8,6 +8,7 @@ import fondo from "../images/fondo.webp";
 import logo from "../images/BLANCO.webp";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaHandPointUp } from "react-icons/fa";
+import ProjectLoader from "../../../shared/components/loaders/ProjectLoader";
 
 function obtenerPisoInicial(project, floorId) {
     if (!project?.pisos?.length) {
@@ -140,19 +141,7 @@ function Recorrido() {
     }, [floorId]);
 
     if (loading) {
-        return (
-            <main
-                className="
-                    flex
-                    min-h-screen
-                    items-center
-                    justify-center
-            ">
-                <p>
-                    Cargando recorrido...
-                </p>
-            </main>
-        );
+        return <ProjectLoader text="PREPARANDO HOME"/>
     }
 
     if (!project) {

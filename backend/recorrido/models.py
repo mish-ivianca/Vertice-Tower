@@ -134,6 +134,7 @@ class Piso(models.Model):
     )
     imagePiso = models.ImageField(
         upload_to=piso_image_path
+        
     )
     def __str__(self):
         return self.nombrePiso

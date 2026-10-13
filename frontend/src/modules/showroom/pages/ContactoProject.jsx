@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { getContacto } from "../../../services/api";
 import { getUbicacion } from "../../../services/api";
+import ProjectLoader from "../../../shared/components/loaders/ProjectLoader";
 
 function Contacto() {
     const [contacto, setContacto] = useState(null);
@@ -77,11 +78,7 @@ function Contacto() {
     };
 
     if (loading) {
-        return (
-            <main className="flex min-h-screen items-center justify-center">
-                <p>Cargando contacto...</p>
-            </main>
-        );
+        return <ProjectLoader text="PREPARANDO CONTACTO"/>
     }
 
     if (!contacto) {

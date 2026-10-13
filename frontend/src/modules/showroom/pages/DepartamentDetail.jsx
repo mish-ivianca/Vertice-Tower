@@ -6,6 +6,7 @@ import UnidadViewSelector from "../components/Unidad/UnidadViewSelector";
 import UnidadViewer from "../components/Unidad/UnidadViewer";
 import { HiMiniArrowLeftStartOnRectangle } from "react-icons/hi2";
 import { HiMiniArrowRightStartOnRectangle } from "react-icons/hi2";
+import ProjectLoader from "../../../shared/components/loaders/ProjectLoader";
 
 function DepartmentDetail() {
     const { setHideFooter } = useOutletContext();
@@ -104,13 +105,7 @@ function DepartmentDetail() {
     }, [view, setHideFooter]);
 
     if (loading) {
-        return (
-            <main className="min-h-screen flex items-center justify-center">
-                <p>
-                    Cargando unidad...
-                </p>
-            </main>
-        );
+        return <ProjectLoader text="PREPARANDO UNIDADES"/>
     }
 
     if (!project) {
