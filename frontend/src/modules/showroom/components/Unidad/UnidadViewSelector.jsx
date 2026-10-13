@@ -67,7 +67,7 @@ function UnidadViewSelector({
             ${
                 view === "tour"
                     ? `
-                        bottom-24
+                        bottom-25
 
                         bg-black/55
                         border-white/20
