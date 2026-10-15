@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import HeroBackground from "./HeroBackground";
 import { GoArrowRight } from "react-icons/go";
 import {getProyectoRecorrido} from "../../../../services/api";
+import logo1 from "../../images/LOGO1.webp";
+import logo2 from "../../images/LOGO2.webp";
+import logo3 from "../../images/LOGO3.webp";
 
 function HeroProject({ project, empresa }) {
     const navigate = useNavigate();
@@ -197,31 +200,53 @@ function HeroProject({ project, empresa }) {
                                     </button>
                                 </motion.div>
                             )}
+                            
                         </AnimatePresence>
                     </motion.div>
                 </AnimatePresence>
             </div>
-            {stage === 0 && empresa?.logoEmpresa && (
-            <img
-                src={empresa.logoEmpresa}
-                alt={empresa?.nombreEmpresa || "Madero SRL"}
+            <div
                 className="
                     absolute
-                    right-6
-                    block
-                    h-10
-                    w-auto
-                    object-contain
-                    brightness-0
-                    invert
-                    md:bottom-8
-                    md:h-16
-                    bottom-15
-                    lg:right-12
-                    lg:h-20
+                    bottom-6
+                    left-4
+                    right-4
+                    z-30
+
+                    flex
+                    h-25
+                    items-center
+                    justify-center
+                    gap-2
+                    lg:gap-10
                 "
-            />
-            )}
+            >
+                {[logo1, logo2, logo3].map((logo, index) => (
+                    <div
+                        key={index}
+                        className="
+                            flex
+                            h-12
+                            w-auto
+                            items-center
+                            justify-center
+                            md:h-14
+                            lg:h-16
+                        "
+                    >
+                        <img
+                            src={logo}
+                            alt={`Logo ${index + 1}`}
+                            className="
+                                max-h-full
+                                max-w-full
+                                object-contain
+                            "
+                        />
+                    </div>
+                ))}
+            </div>
+            
         </section>
     );
 }
