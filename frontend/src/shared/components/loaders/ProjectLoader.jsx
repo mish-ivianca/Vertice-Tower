@@ -1,4 +1,5 @@
 import { useOutletContext } from "react-router-dom";
+import logoA from "../../../modules/showroom/images/BLANCO.webp";
 
 function ProjectLoader({text = "CARGANDO",}) {
     const {project,} = useOutletContext();
@@ -142,9 +143,9 @@ function ProjectLoader({text = "CARGANDO",}) {
                             "
                         />
                     </div>
-                    {logo && (
+                    {logoA && (
                         <img
-                            src={logo}
+                            src={logoA}
                             alt=""
                             draggable={false}
                             className="
