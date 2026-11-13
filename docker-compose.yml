@@ -28,8 +28,6 @@ services:
       - "8000"
   hero-worker:
       image: vertice-backend:local
-      profiles:
-        - processing
       restart: unless-stopped
       env_file: .env
       environment:
