@@ -295,3 +295,15 @@ body {
         opacity: 0;
     }
 }
+
+@keyframes swipeUp {
+  0%, 100% {
+    transform: translateX(8px);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateX(-8px);
+    opacity: 1;
+  }
+}

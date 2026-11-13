@@ -4,46 +4,80 @@ from proyectos.models import Proyecto
 
 
 class HeroStage(models.Model):
+
+    class Tipo(models.TextChoices):
+        VIDEO = "video", "Video"
+        SECUENCIA = "secuencia", "Secuencia WebP"
+
+    class Estado(models.TextChoices):
+        PENDIENTE = "pendiente", "Pendiente"
+        PROCESANDO = "procesando", "Procesando"
+        LISTO = "listo", "Listo"
+        ERROR = "error", "Error"
+
     proyecto = models.ForeignKey(
         Proyecto,
         on_delete=models.CASCADE,
         related_name="hero_stages"
     )
+
+    orden = models.PositiveIntegerField(default=0)
+
+    tipo = models.CharField(
+        max_length=10,
+        choices=Tipo.choices,
+        default=Tipo.VIDEO
+    )
+
+    # MP4 original
     video = models.FileField(
         upload_to="proyecto/hero/videos/"
     )
-    videoURL = models.URLField(
-        blank=True,
-        null=True
-    )
-    poster = models.ImageField(
-        upload_to="proyecto/hero/posters/",
-        blank=True,
-        null=True
-    )
+
+    # Elementos visuales del Home
     imagenHero = models.ImageField(
         upload_to="proyecto/hero/images/",
         blank=True,
         null=True
     )
-    title = models.CharField(
-        max_length=200,
-        blank=True
-    )
-    subtitle = models.TextField(
-        blank=True
-    )
+
+    subtitle = models.TextField(blank=True)
+
     button = models.CharField(
         max_length=100,
         blank=True
     )
-    orden = models.PositiveIntegerField(
+
+    # Procesamiento automático
+    estado = models.CharField(
+        max_length=12,
+        choices=Estado.choices,
+        default=Estado.PENDIENTE
+    )
+
+    carpeta_frames = models.CharField(
+        max_length=500,
+        blank=True
+    )
+
+    total_frames = models.PositiveIntegerField(
         default=0
     )
+
+    error_procesamiento = models.TextField(
+        blank=True
+    )
+
     class Meta:
         ordering = ["orden"]
+
     def __str__(self):
-        return f"{self.proyecto.nombreProyecto} - Stage {self.orden}"
+        return (
+            f"{self.proyecto.nombreProyecto}"
+            f" - Stage {self.orden}"
+        )
+
+
 
 class Ubicacion(models.Model):
     proyecto = models.OneToOneField(

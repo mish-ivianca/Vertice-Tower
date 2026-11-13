@@ -11,7 +11,11 @@ WORKDIR /app
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         libpq5 \
+        ffmpeg \
     && rm -rf /var/lib/apt/lists/*
+
+# Ruta de FFmpeg dentro del contenedor Linux
+ENV FFMPEG_BIN=/usr/bin/ffmpeg
 
 # Dependencias Python
 COPY requirements.txt .

@@ -7,20 +7,39 @@ from .models import (
 )
 from proyectos.models import Proyecto
 
+
 class HeroStageSerializer(serializers.ModelSerializer):
+    frames_base_url = serializers.SerializerMethodField()
     class Meta:
         model = HeroStage
         fields = [
             "id",
+            "proyecto",
+            "tipo",
             "video",
-            "videoURL",
-            "poster",
             "imagenHero",
-            "title",
             "subtitle",
             "button",
             "orden",
+            "estado",
+            "carpeta_frames",
+            "total_frames",
+            "error_procesamiento",
+            "frames_base_url",
         ]
+
+    def get_frames_base_url(self, obj):
+        if not obj.carpeta_frames or obj.estado != "listo":
+            return None
+        from django.conf import settings
+        ruta = (
+            f"{settings.MEDIA_URL.rstrip('/')}/"
+            f"{obj.carpeta_frames.strip('/')}/"
+        )
+        request = self.context.get("request")
+        if request:
+            return request.build_absolute_uri(ruta)
+        return ruta
 
 
 class UbicacionSerializer(serializers.ModelSerializer):
