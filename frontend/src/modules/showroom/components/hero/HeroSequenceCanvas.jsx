@@ -7,7 +7,7 @@ import logo3 from "../../images/LOGO3.webp";
 import { PiHandTapThin } from "react-icons/pi";
 
 const INTRO_END = 0.08; // 8 % del scroll: fundido video 1 -> secuencia 2.
-const INERTIA_MS = 170; // inercia cinematográfica probada.
+const INERTIA_MS = 180; // inercia cinematográfica probada.
 const GLAMBOT_INTENSITY = 0.7;
 const BOTON_FRAMES_ANTES = 60; // ~2.5 segundos del video original a 24 FPS.
 const clamp01 = (x) => Math.max(0, Math.min(1, x));
@@ -449,7 +449,7 @@ export default function HeroSequenceCanvas({ project }) {
               drop-shadow-md
             "
           >
-            DESLIZA PARA EXPLORAR ↑
+            DESLIZA PARA EXPLORAR ↓
           </span>
           <div className="flex items-center justify-center">
             {/* MÓVIL: mano animada */}

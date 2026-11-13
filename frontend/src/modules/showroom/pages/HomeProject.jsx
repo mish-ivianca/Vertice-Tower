@@ -4,6 +4,7 @@ import { useOutletContext, } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { getProyectoHero } from "../../../services/api";
 import ProjectLoader from "../../../shared/components/loaders/ProjectLoader";
+import HeroProject from "../components/hero/HeroProject";
 
 const HeroSequenceCanvas = lazy(() => import("../components/hero/HeroSequenceCanvas"));
 
@@ -32,6 +33,13 @@ function HomeProject() {
   if (!project) {
     return <ProjectLoader text="PREPARANDO HOME" />;
   }
+  const sequenceReady = project?.hero?.some(
+    (stage) =>
+      stage.tipo === "secuencia" &&
+      stage.estado === "listo" &&
+      Number(stage.total_frames) > 0 &&
+      Boolean(stage.frames_base_url)
+  );
 
   return (
     <>
@@ -47,9 +55,21 @@ function HomeProject() {
         />
       </Helmet>
 
-      <Suspense fallback={<ProjectLoader text="PREPARANDO SECUENCIA"/>}>
-        <HeroSequenceCanvas project={project} />
-      </Suspense>
+      {!project ? (
+        <ProjectLoader text="CARGANDO PROYECTO" />
+      ) : sequenceReady ? (
+        <Suspense
+          fallback={<ProjectLoader text="PREPARANDO SECUENCIA" />}
+        >
+          <HeroSequenceCanvas project={project} />
+        </Suspense>
+      ) : (
+        <HeroProject
+          project={project}
+          empresa={projectBase?.empresa}
+        />
+      )}
+
     </>
   );
 }
